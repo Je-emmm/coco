@@ -1,0 +1,810 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <windows.h>
+#include <iomanip>
+
+using namespace std;
+
+class UserInfo {
+public:
+    string user;
+    string program;
+    string section;
+    vector<bool> quizStatus; // To track if quizzes have been taken
+    vector<int> scores; // To store scores for each subject
+
+    UserInfo() {
+        quizStatus.resize(9, false); // Initialize all quizzes as not taken
+        scores.resize(9, 0); // Initialize scores to 0
+    }
+
+    void display () {
+        int response;
+        clearscreen();
+        cout << "================================================================" << endl;
+        cout << "                Welcome, " << user << "!                             " << endl;
+        cout << "          Program & Section: " << program << " - " << section   << endl;
+        cout << "================================================================" <<endl;
+        cout << "1. Take Quiz" <<endl;
+        cout << "2. View Scores" <<endl;
+        cout << "================================================================" << endl;
+        cout << "Your Response :: ";
+        cin >> response;
+
+        if(response == 1){
+            subjects();
+        }else if(response == 2){
+        reviewquiz();
+        }else{
+        clearscreen();
+        cout << "INVALID CHOICES";
+        Sleep(1000);
+        }
+    }
+
+    void reviewquiz() {
+    clearscreen();
+    cout << "==================================================================================" << endl;
+    cout << "          Name : " << user << "!                             " << endl;
+    cout << "          Program & Section: " << program << " - " << section   << endl;
+    cout << "==================================================================================" << endl;
+    cout << "Subject                                         | Score      | Percentage | Status" << endl;
+    cout << "----------------------------------------------------------------------------------" << endl;
+
+    vector<string> subjects = {
+        "Discrete Mathematics",
+        "National Service Training Program 2",
+        "PATHFIT 2",
+        "Purposive Communication",
+        "Applied Ethics",
+        "Filipino sa Iba't ibang Disiplina",
+        "Science Technology and Society",
+        "Art Appreciation",
+        "Computer Programming"
+    };
+
+    for (int i = 0; i < subjects.size(); i++) {
+        int totalQuestions = 10;
+        int score = scores[i];
+        double percentage;
+        string status;
+
+        if (quizStatus[i]) {
+            percentage = 50 + (static_cast<double>(score) / totalQuestions) * 50;
+            status = (percentage >= 75) ? "Passed" : "Failed";
+        } else {
+            score = 0;
+            percentage = 0.0;
+            status = "N/A";
+        }
+
+        cout << setw(47) << left << subjects[i] << " | "
+             << setw(8) << score << "/" << totalQuestions << " | "
+             << setw(9) << fixed << setprecision(2) << percentage << "% | "
+             << status << endl;
+    }
+
+    cout << "===================================================================================" << endl;
+    system("pause");
+}
+
+    void subjects() {
+    clearscreen();
+    int choice;
+    cout << "================================================================" << endl;
+    cout << "          Name : " << user << "!                             " << endl;
+    cout << "          Program & Section: " << program << " - " << section   << endl;
+    cout << "================================================================" << endl;
+    cout << "  Subjects                                         |  Status   |" << endl;
+    cout << "----------------------------------------------------------------" << endl;
+
+    vector<string> subjects = {
+        "Discrete Mathematics",
+        "National Service Training Program 2",
+        "PATHFIT 2",
+        "Purposive Communication",
+        "Applied Ethics",
+        "Filipino sa Iba't ibang Disiplina",
+        "Science Technology and Society",
+        "Art Appreciation",
+        "Computer Programming"
+    };
+
+    for (int i = 0; i < subjects.size(); i++) {
+        cout << " " << setw(2) << left << (i + 1) << ". "
+             << setw(44) << left << subjects[i] << "  | "
+             << setw(10) << left << (quizStatus[i] ? "Taken" : "Not Taken") << "|" << endl;
+        cout << "----------------------------------------------------------------" << endl;
+    }
+    cout << "10. Exit                                                       |" << endl;
+    cout << "----------------------------------------------------------------"<<endl;
+
+    cout << "Enter your Choice (1-10): ";
+    cin >> choice;
+
+    if (choice >= 1 && choice <= 9) {
+        if (!quizStatus[choice - 1]) {
+            clearscreen();
+            switch (choice) {
+                case 1: quizDiscreteMathematics(); break;
+                case 2: quizNationalServiceTraining(); break;
+                case 3: quizPathfit(); break;
+                case 4: quizPurposiveCommunication(); break;
+                case 5: quizAppliedEthics(); break;
+                case 6: quizFilipino(); break;
+                case 7: quizScienceTechnology(); break;
+                case 8: quizArtAppreciation(); break;
+                case 9: quizComputerProgramming(); break;
+            }
+            quizStatus[choice - 1] = true;
+        } else {
+            cout << "You have already taken this quiz." << endl;
+            Sleep(2000);
+        }
+    } else if (choice == 10) {
+        return;
+    } else {
+        cout << "Invalid selection." << endl;
+        Sleep(500);
+    }
+}
+
+
+    void clearscreen() {
+        system("cls");
+    }
+
+    void takeQuiz(int subjectIndex) {
+        switch (subjectIndex) {
+            case 1: quizDiscreteMathematics(); break;
+            case 2: quizNationalServiceTraining(); break;
+            case 3: quizPathfit(); break;
+            case 4: quizPurposiveCommunication(); break;
+            case 5: quizAppliedEthics(); break;
+            case 6: quizFilipino(); break;
+            case 7: quizScienceTechnology(); break;
+            case 8: quizArtAppreciation(); break;
+            case 9: quizComputerProgramming(); break;
+            case 10: display();
+        }
+        quizStatus[subjectIndex] = true;
+    }
+
+    void quizDiscreteMathematics() {
+        cout << "Quiz: Discrete Mathematics" << endl;
+        scores[0] = 0;
+        char answer;
+
+        cout << "1. Which of these is a logical OR statement?\n";
+    cout << "A. p and q\nB. p or q\nC. not p\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if(answer == 'b' || answer == 'B') scores[0]++;
+
+    cout << "2. Which of these is a set?\n";
+    cout << "A. 7\nB. {7}\nC. (7)\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if(answer == 'b' || answer == 'B') scores[0]++;
+
+    cout << "3. How many elements are in the set {1, 2, 3}?\n";
+    cout << "A. 2\nB. 3\nC. 4\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if(answer == 'b' || answer == 'B') scores[0]++;
+
+    cout << "4. Which of these is an even number?\n";
+    cout << "A. 5\nB. 7\nC. 8\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if(answer == 'c' || answer == 'C') scores[0]++;
+
+    cout << "5. What is 7 mod 3?\n";
+    cout << "A. 1\nB. 2\nC. 0\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if(answer == 'b' || answer == 'B') scores[0]++;
+
+    cout << "6. Which of the following is a function?\n";
+    cout << "A. {(1,2), (1,3)}\nB. {(1,2), (2,3)}\nC. {(2,1), (2,2)}\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if(answer == 'b' || answer == 'B') scores[0]++;
+
+    cout << "7. A graph has 3 vertices and 2 edges. Which statement is true?\n";
+    cout << "A. The graph is complete\nB. The graph is disconnected\nC. The graph is not complete\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if(answer == 'c' || answer == 'C') scores[0]++;
+
+    cout << "8. Which symbol or word means \"not\" in logic?\n";
+    cout << "A. or\nB. not\nC. and\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if(answer == 'b' || answer == 'B') scores[0]++;
+
+    cout << "9. How many subsets does the set {a, b} have?\n";
+    cout << "A. 2\nB. 3\nC. 4\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if(answer == 'c' || answer == 'C') scores[0]++;
+
+    cout << "10. What is the smallest prime number?\n";
+    cout << "A. 1\nB. 2\nC. 3\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if(answer == 'b' || answer == 'B') scores[0]++;
+
+        cout << "Your score: " << scores[0] << "/10" << endl;
+        Sleep(2000);
+    }
+
+    void quizNationalServiceTraining() {
+        cout << "Quiz: National Service Training Program 2" << endl;
+        scores[1] = 0;
+        char answer;
+
+        cout << "1. What does NSTP stand for?\n";
+    cout << "A. National Service Training Program\nB. National Science Training Program\nC. National Student Training Program\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[1]++;
+
+    cout << "2. What is the primary goal of NSTP?\n";
+    cout << "A. To improve academic skills\nB. To promote civic consciousness and defense preparedness\nC. To learn sports\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'b' || answer == 'B') scores[1]++;
+
+    cout << "3. Which of the following is NOT a component of NSTP?\n";
+    cout << "A. ROTC (Reserve Officers' Training Corps)\nB. CWTS (Civic Welfare Training Service)\nC. Basketball Training\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'c' || answer == 'C') scores[1]++;
+
+    cout << "4. What does ROTC stand for?\n";
+    cout << "A. Reserve Officers' Training Corps\nB. Rapid Operations Training Corps\nC. Regional Officer Training Corps\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[1]++;
+
+    cout << "5. What does CWTS focus on?\n";
+    cout << "A. Civic Welfare and Community Service\nB. Military Training\nC. School Leadership\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[1]++;
+
+    cout << "6. How many years do students typically take NSTP?\n";
+    cout << "A. 1 year\nB. 2 years\nC. 3 years\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[1]++;
+
+    cout << "7. What is the required age for students to take NSTP?\n";
+    cout << "A. 15 years old\nB. 18 years old\nC. 21 years old\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'b' || answer == 'B') scores[1]++;
+
+    cout << "8. Which of the following is an activity under CWTS?\n";
+    cout << "A. Building homes for the community\nB. Military drill practice\nC. Leadership seminars\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[1]++;
+
+    cout << "9. NSTP is mandatory for which group of students?\n";
+    cout << "A. Freshmen students in college\nB. High school students\nC. Graduate students\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[1]++;
+
+    cout << "10. Where do students perform NSTP activities?\n";
+    cout << "A. In school grounds\nB. In community areas\nC. Both A and B\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'c' || answer == 'C') scores[1]++;
+
+        cout << "Your score: " << scores[1] << "/10" << endl;
+        Sleep(2000);
+    }
+
+    void quizPathfit() {
+        cout << "Quiz: Pathfit" << endl;
+        scores[2] = 0;
+        char answer;
+
+        cout << "1. What does PATHFIT stand for?\n";
+    cout << "A. Physical and Technical Fitness\nB. Physical Activity and Training for Health\nC. Physical Education for Fitness\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'b' || answer == 'B') scores[2]++;
+
+    cout << "2. Which of these is NOT a component of Pathfit?\n";
+    cout << "A. Physical fitness\nB. Mental wellness\nC. Cooking lessons\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'c' || answer == 'C') scores[2]++;
+
+    cout << "3. What is the main goal of Pathfit?\n";
+    cout << "A. To promote physical fitness\nB. To improve culinary skills\nC. To encourage arts and crafts\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[2]++;
+
+    cout << "4. Pathfit encourages what type of physical activity?\n";
+    cout << "A. Yoga\nB. Running\nC. Both A and B\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'c' || answer == 'C') scores[2]++;
+
+    cout << "5. What is one benefit of regular physical activity in Pathfit?\n";
+    cout << "A. Increases heart health\nB. Increases stress\nC. Reduces energy\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[2]++;
+
+    cout << "6. Pathfit also focuses on improving which mental aspect?\n";
+    cout << "A. Creativity\nB. Stress management\nC. Problem-solving\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'b' || answer == 'B') scores[2]++;
+
+    cout << "7. Pathfit activities are mainly done in what setting?\n";
+    cout << "A. School grounds\nB. Classroom\nC. Online\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[2]++;
+
+    cout << "8. What does Pathfit promote besides physical fitness?\n";
+    cout << "A. Healthy eating\nB. Problem-solving skills\nC. Good communication\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[2]++;
+
+    cout << "9. Which of the following is NOT an activity in Pathfit?\n";
+    cout << "A. Jogging\nB. Cooking\nC. Meditation\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'b' || answer == 'B') scores[2]++;
+
+    cout << "10. Which of these is the best practice to maintain fitness?\n";
+    cout << "A. Regular exercise\nB. Skipping meals\nC. Sleeping late\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[2]++;
+
+        cout << "Your score: " << scores[2] << "/10" << endl;
+        Sleep(2000);
+    }
+
+    void quizPurposiveCommunication() {
+        cout << "Quiz: Purposive Communication" << endl;
+        scores[3] = 0;
+        char answer;
+
+         cout << "1. What is purposive communication?\n";
+    cout << "A. Communication for leisure\nB. Communication for a specific purpose\nC. Communication for entertainment\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'b' || answer == 'B') scores[3]++;
+
+    cout << "2. Which is an example of formal communication?\n";
+    cout << "A. Texting a friend\nB. Giving a presentation\nC. Chatting in a coffee shop\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'b' || answer == 'B') scores[3]++;
+
+    cout << "3. What is the primary goal of effective communication?\n";
+    cout << "A. To entertain\nB. To inform or persuade\nC. To confuse the listener\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'b' || answer == 'B') scores[3]++;
+
+    cout << "4. Which of the following is NOT a type of communication?\n";
+    cout << "A. Verbal\nB. Non-verbal\nC. Random\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'c' || answer == 'C') scores[3]++;
+
+    cout << "5. What does non-verbal communication include?\n";
+    cout << "A. Words and phrases\nB. Body language\nC. Written messages\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'b' || answer == 'B') scores[3]++;
+
+    cout << "6. What is active listening?\n";
+    cout << "A. Only hearing the speaker\nB. Listening attentively and responding\nC. Ignoring distractions\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'b' || answer == 'B') scores[3]++;
+
+    cout << "7. What is an example of persuasive communication?\n";
+    cout << "A. Convincing someone to try a product\nB. Asking for help\nC. Reading a book aloud\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[3]++;
+
+    cout << "8. What is an example of written communication?\n";
+    cout << "A. Giving a speech\nB. Sending an email\nC. Making a phone call\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'b' || answer == 'B') scores[3]++;
+
+    cout << "9. What is the barrier in communication?\n";
+    cout << "A. Good relationship\nB. Clear message\nC. Noise or distractions\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'c' || answer == 'C') scores[3]++;
+
+    cout << "10. Which of these is important for effective communication?\n";
+    cout << "A. Clarity\nB. Ambiguity\nC. Silence\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[3]++;
+
+        cout << "Your score: " << scores[3] << "/10" << endl;
+        Sleep(2000);
+    }
+
+    void quizAppliedEthics() {
+        cout << "Quiz: Applied Ethics" << endl;
+        scores[4] = 0;
+        char answer;
+
+        cout << "1. What is the main concern of ethics?\n";
+    cout << "A. How to make money\nB. What is right and wrong\nC. How to win arguments\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'b' || answer == 'B') scores[4]++;
+
+    cout << "2. What does 'moral relativism' mean?\n";
+    cout << "A. Morality is absolute and unchanging\nB. Morality can differ from culture to culture\nC. Morality has no impact on decisions\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'b' || answer == 'B') scores[4]++;
+
+    cout << "3. What is one example of unethical behavior?\n";
+    cout << "A. Helping others\nB. Lying to gain advantage\nC. Giving charity\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'b' || answer == 'B') scores[4]++;
+
+    cout << "4. What is the importance of ethics in professional life?\n";
+    cout << "A. To maintain trust and respect\nB. To avoid work\nC. To get promotions\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[4]++;
+
+    cout << "5. Which of these is an example of a utilitarian approach?\n";
+    cout << "A. Maximizing happiness for the most people\nB. Following rules strictly\nC. Prioritizing personal desires over others\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[4]++;
+
+    cout << "6. What does 'confidentiality' mean in ethics?\n";
+    cout << "A. Keeping secrets from everyone\nB. Respecting others' privacy\nC. Sharing information freely\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'b' || answer == 'B') scores[4]++;
+
+    cout << "7. What is an example of an ethical dilemma?\n";
+    cout << "A. Deciding between two equally good options\nB. Deciding between right and wrong\nC. Deciding between a good and bad option\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'b' || answer == 'B') scores[4]++;
+
+    cout << "8. Which of the following best describes an ethical action?\n";
+    cout << "A. Helping a friend in need\nB. Ignoring the needs of others\nC. Taking advantage of others\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[4]++;
+
+    cout << "9. Why are ethical principles important in society?\n";
+    cout << "A. They guide behavior for the common good\nB. They create confusion\nC. They encourage dishonesty\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[4]++;
+
+    cout << "10. Which of these actions is unethical?\n";
+    cout << "A. Cheating on a test\nB. Helping a neighbor\nC. Volunteering for charity\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[4]++;
+
+        cout << "Your score: " << scores[4] << "/10" << endl;
+        Sleep(2000);
+    }
+
+    void quizFilipino() {
+        cout << "Quiz: Filipino" << endl;
+        scores[5] = 0;
+        char answer;
+
+        cout << "1. What does FILDIS stand for?\n";
+    cout << "A. Filipino Discipline\nB. Filipino and the Disciplines\nC. Filipino Ideas\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'b' || answer == 'B') scores[5]++;
+
+    cout << "2. What is the main subject of FILDIS?\n";
+    cout << "A. History of the Philippines\nB. Filipino culture and its disciplines\nC. Filipino language\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'b' || answer == 'B') scores[5]++;
+
+    cout << "3. FILDIS explores the relationship between which of the following?\n";
+    cout << "A. Culture and society\nB. Science and nature\nC. Technology and art\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[5]++;
+
+    cout << "4. What does FILDIS help students understand?\n";
+    cout << "A. Filipino cultural values\nB. Mathematics and statistics\nC. Environmental protection\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[5]++;
+
+    cout << "5. Which discipline is NOT typically discussed in FILDIS?\n";
+    cout << "A. Social Science\nB. Filipino traditions\nC. Computer Science\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'c' || answer == 'C') scores[5]++;
+
+    cout << "6. What is a major theme in FILDIS?\n";
+    cout << "A. Understanding Filipino identity\nB. Solving mathematical problems\nC. Developing business plans\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[5]++;
+
+    cout << "7. Which of the following is a major influence on Filipino culture?\n";
+    cout << "A. American colonization\nB. Spanish colonization\nC. Ancient Chinese philosophy\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'b' || answer == 'B') scores[5]++;
+
+    cout << "8. What is an important Filipino value?\n";
+    cout << "A. Bayanihan (community spirit)\nB. Isolation\nC. Selfishness\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[5]++;
+
+    cout << "9. FILDIS examines which aspects of the Filipino community?\n";
+    cout << "A. Political, social, and cultural\nB. Technological advancements\nC. Economic policies\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[5]++;
+
+    cout << "10. Which of these is a part of Filipino literature?\n";
+    cout << "A. Novels like Noli Me Tangere\nB. Programming languages\nC. Sports events\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[5]++;
+
+        cout << "Your score: " << scores[5] << "/10" << endl;
+        Sleep(2000);
+    }
+
+    void quizScienceTechnology() {
+        cout << "Quiz: Science and Technology" << endl;
+        scores[6] = 0;
+        char answer;
+
+        cout << "1. What is the relationship between science and technology?\n";
+    cout << "A. They are unrelated\nB. Technology is an application of science\nC. Science is the application of technology\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'b' || answer == 'B') scores[6]++;
+
+    cout << "2. Which of these is an example of technology?\n";
+    cout << "A. Computers\nB. The Earth\nC. Water\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[6]++;
+
+    cout << "3. How does science impact society?\n";
+    cout << "A. It makes society more organized\nB. It improves the quality of life\nC. It creates divisions among people\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'b' || answer == 'B') scores[6]++;
+
+    cout << "4. What is the role of technology in the economy?\n";
+    cout << "A. It has no impact\nB. It drives innovation and efficiency\nC. It only improves leisure activities\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'b' || answer == 'B') scores[6]++;
+
+    cout << "5. How does society influence science and technology?\n";
+    cout << "A. Through cultural beliefs and needs\nB. It does not influence science\nC. By limiting resources\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[6]++;
+
+    cout << "6. What is the main concern of technology ethics?\n";
+    cout << "A. How to make technology more expensive\nB. The impact of technology on privacy, security, and society\nC. To create new technologies without limitations\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'b' || answer == 'B') scores[6]++;
+
+    cout << "7. What is an example of a scientific breakthrough?\n";
+    cout << "A. The discovery of electricity\nB. The invention of a new car model\nC. The creation of art\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[6]++;
+
+    cout << "8. How has technology affected communication?\n";
+    cout << "A. It has made communication faster and easier\nB. It has slowed down communication\nC. It has made communication impossible\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[6]++;
+
+    cout << "9. Which of the following is a major concern in the use of new technology?\n";
+    cout << "A. Overconsumption of resources\nB. Security and privacy issues\nC. Increased leisure time\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'b' || answer == 'B') scores[6]++;
+
+    cout << "10. How does technology shape education?\n";
+    cout << "A. By improving access to information\nB. By making learning harder\nC. By reducing the need for teachers\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[6]++;
+
+        cout << "Your score: " << scores[6] << "/10" << endl;
+        Sleep(2000);
+    }
+
+    void quizArtAppreciation() {
+        cout << "Quiz: Art Appreciation" << endl;
+        scores[7] = 0;
+        char answer;
+
+        cout << "1. What is art appreciation?\n";
+    cout << "A. Understanding and enjoying art\nB. Creating art\nC. Selling art\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[7]++;
+
+    cout << "2. What is an example of a visual art?\n";
+    cout << "A. Music\nB. Painting\nC. Dance\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'b' || answer == 'B') scores[7]++;
+
+    cout << "3. What does a painting typically express?\n";
+    cout << "A. Ideas, emotions, or concepts\nB. Random shapes\nC. Only colors\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[7]++;
+
+    cout << "4. What type of art involves using sound?\n";
+    cout << "A. Performing art\nB. Visual art\nC. Literary art\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[7]++;
+
+    cout << "5. Which of the following is an example of a sculpture?\n";
+    cout << "A. A clay model\nB. A painting on a canvas\nC. A photograph\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[7]++;
+
+    cout << "6. What does art help people to understand?\n";
+    cout << "A. Human emotions\nB. Scientific theories\nC. Only abstract concepts\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[7]++;
+
+    cout << "7. Which is considered a performance art?\n";
+    cout << "A. Ballet\nB. Painting\nC. Sculpture\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[7]++;
+
+    cout << "8. What is the primary purpose of art?\n";
+    cout << "A. To entertain and provoke thought\nB. To make money\nC. To confuse the viewer\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[7]++;
+
+    cout << "9. Which of these is a famous work of art?\n";
+    cout << "A. The Mona Lisa\nB. The Great Wall of China\nC. The Eiffel Tower\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[7]++;
+
+    cout << "10. What is an example of literary art?\n";
+    cout << "A. A poem\nB. A sculpture\nC. A dance performance\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[7]++;
+
+        cout << "Your score: " << scores[7] << "/10" << endl;
+        Sleep(2000);
+    }
+
+    void quizComputerProgramming() {
+        cout << "Quiz: Computer Programming" << endl;
+        scores[8] = 0;
+        char answer;
+
+        cout << "1. What is a programming language?\n";
+    cout << "A. A set of commands used to communicate with a computer\nB. A way to speak to people\nC. A type of software\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[8]++;
+
+    cout << "2. Which of the following is a high-level programming language?\n";
+    cout << "A. Python\nB. Machine Code\nC. Assembly Language\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[8]++;
+
+    cout << "3. What does a compiler do?\n";
+    cout << "A. Translates code from high-level language to machine code\nB. Runs the program\nC. Writes code automatically\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[8]++;
+
+    cout << "4. What is the output of the following code: `int a = 5; cout << a;`?\n";
+    cout << "A. 5\nB. 'a'\nC. Error\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[8]++;
+
+    cout << "5. Which of these is a valid variable name in C++?\n";
+    cout << "A. 1stVar\nB. _var\nC. int var\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'b' || answer == 'B') scores[8]++;
+
+    cout << "6. Which data type is used to store a single character in C++?\n";
+    cout << "A. int\nB. char\nC. string\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'b' || answer == 'B') scores[8]++;
+
+    cout << "7. What does the keyword `return` do in a function?\n";
+    cout << "A. Exits the function and returns a value\nB. Prints the result\nC. Loops forever\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[8]++;
+
+    cout << "8. What is an array in programming?\n";
+    cout << "A. A list of values of the same data type\nB. A type of function\nC. A method to print messages\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[8]++;
+
+    cout << "9. Which of the following is used for looping in C++?\n";
+    cout << "A. for\nB. loop\nC. iterate\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'a' || answer == 'A') scores[8]++;
+
+    cout << "10. What does an IDE stand for in programming?\n";
+    cout << "A. Integrated Design Environment\nB. Integrated Development Environment\nC. Independent Design Environment\n" << endl;
+    cout << "Your answer: ";
+    cin >> answer;
+    if (answer == 'b' || answer == 'B') scores[8]++;
+
+        cout << "Your score: " << scores[8] << "/10" << endl;
+        Sleep(2000);
+    }
+};
+
+int main() {
+    UserInfo user;
+    cout << "Enter your name: ";
+    cin >> user.user;
+    cout << "Enter your program: ";
+    cin >> user.program;
+    cout << "Enter your section: ";
+    cin >> user.section;
+
+    while (true) {
+        user.display();
+    }
+
+    return 0;
+}
