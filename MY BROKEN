@@ -26,6 +26,165 @@ private:
     map<string, vector<char>> userAnswers;
     string progressFile;
 
+    map<string, vector<pair<string, char>>> quizQuestions = {
+        {"Applied_Ethics", {
+            {"1. Ethics is primarily concerned with: \na)  Legal rules.\ntb)  Moral principles. \nc)  Social customs.", 'b'},
+                {"2. What is a conflict of interest? \na)  A disagreement with a colleague. \nb)  A situation where personal interest clashes with professional duty. \nc)  A misunderstanding at work.", 'c'},
+                {"3. Beneficence means: \na)  Doing no harm. \nb)  Acting for the good of others. \nc)  Being fair.", 'b'},
+                {"4. What is an ethical dilemma? \na)  A simple decision. \nb)  A situation with conflicting moral values. \nc)  A legal problem.", 'b'},
+                {"5. Which is crucial for ethical decision-making? \na)  Ignoring emotions. \nb)  Considering all stakeholders. \nc)  Rushing to judgment.", 'b'},
+                {"6. What is the impact of social media on society? \na)  Only positive. \nb)  Only negative. \nc)  Both positive and negative. ", 'c'},
+                {"7. What is the role of PURPOSIVE COMMUNICATION communication in STS? \na)  Irrelevant. \nb)  Crucial for bridging the gap between PURPOSIVE COMMUNICATION and society. \nc)  Only for scientists.", 'b'},
+                {"8. What is the role of policy in shaping technological development? \na)  No role. \nb)  A significant role in guiding and regulating technological advancements. \nc)  A minor role.", 'b'},
+                {"9. What is a key characteristic of disruptive technologies?\na)  Incremental improvements.\nb)  Radical changes that overturn existing markets or industries.\nc)  Maintaining the status quo.", 'b'},
+                {"10. What is technological obsolescence?\na)  Technology becoming more efficient.\nb)  Technology becoming outdated and replaced.\nc)  Technology becoming more user-friendly.", 'b'},
+                {"11. What is the impact of globalization on technology? \na)  Increased interconnectedness and collaboration in technological development.\nb) No impact.\nc)  Decreased technological advancements.", 'a'},
+                {"12. What is technological obsolescence?\na)  Technology becoming more efficient.\nb)  Technology becoming outdated and replaced.\nc)  Technology becoming more user-friendly.", 'b'},
+                {"13. What is technological obsolescence?\na)  Technology becoming more efficient.\nb)  Technology becoming outdated and replaced.\nc)  Technology becoming more user-friendly.", 'b'}
+            }},
+        {"Purposive_Communication", {
+            {"1. The Scientific Revolution is associated with which period? \na)  Ancient Greece \nb)  The Middle Ages \nc)  The 16th and 17th centuries ?", 'c'},
+                {"2. Which invention revolutionized communication in the 19th century? \na)  The printing press \nb)  The telephone ? \nc)  The internet", 'b'},
+                {"3. The development of the automobile significantly impacted: \na)  Only transportation. \nb)  Urban planning and infrastructure. \nc)  All of the above", 'c'},
+                {"4. What is a major ethical concern regarding genetic engineering? \na)  Increased food production \nb)  Potential for unforeseen consequences \nc)  Improved human health.", 'b'},
+                {"5. The digital divide refers to: \na)  The gap between rich and poor countries \nb)  The unequal access to technology and information \nc) The difference in computer speeds.", 'b'},
+                {"6. Nanotechnology deals with materials at what scale? \na)  Microscopic \nb)  Macroscopic \nc)  Nanoscopic", 'c'},
+                {"7. Biotechnology is primarily concerned with: \na)  The study of rocks \nb)  The manipulation of biological systems \nc)  The study of stars.", 'b'},
+                {"8. Which of these is a potential benefit of artificial intelligence (AI)? \na)  Job displacement \nb)  Improved efficiency and automation \nc)  Increased bias and discrimination", 'b'},
+                {"9. What is a major environmental concern related to technology? \na)  Increased biodiversity \nb)  Pollution and waste generation \nc)  Improved air quality", 'b'},
+                {"10. Sustainable technology aims to: \na)  Maximize economic growth at all costs \nb)  Minimize environmental impact \nc)  Balance economic and environmental needs", 'c'},
+                {"11. The development of renewable energy sources is driven by: \na)  Decreasing fossil fuel prices \nb)  Concerns about climate change \nc)  Increased reliance on fossil fuels", 'b'},
+                {"12. What is a key aspect of responsible innovation? \na)  Ignoring ethical considerations \nb)  Prioritizing economic gains \nc)  Engaging in public dialogue and ethical reflection", 'c'},
+                {"13. What is technological determinism? \na)  Technology shapes society \nb)  Society shapes technology \nc)  Technology and society are independent", 'a'},
+                {"14. What is social constructivism in relation to technology? \na)  Technology is solely determined by its physical properties \nb)  Society shapes the development and use of technology \nc)  Technology develops independently of social forces", 'b'},
+                {"15. What is the impact of social media on society? \na)  Only positive \nb)  Only negative \nc)  Both positive and negative", 'c'},
+                {"16. What is a major concern regarding the use of big data? \na)  Increased efficiency \nb)  Potential for privacy violations \nc)  Improved decision-making", 'b'},
+                {"17. What is the role of PURPOSIVE COMMUNICATION communication in STS? \na)  Irrelevant \nb)  Crucial for bridging the gap between PURPOSIVE COMMUNICATION and society \nc)  Only for scientists", 'b'},
+                {"18. What is technological literacy? \na)  The ability to use technology \nb)  Understanding the societal impacts of technology \nc)  Knowing how to code", 'b'},
+                {"19. What is the relationship between PURPOSIVE COMMUNICATION and technology? \na)  Completely independent \nb)  PURPOSIVE COMMUNICATION informs technology and technology drives further scientific inquiry \nc)  Technology informs PURPOSIVE COMMUNICATION, but PURPOSIVE COMMUNICATION has no impact on technology", 'b'},
+                {"20. What is the role of policy in shaping technological development? \na)  No role \nb)  A significant role in guiding and regulating technological advancements \nc)  A minor role", 'b'},
+                {"21. What is the concept of technological convergence? \na)  Technologies becoming less interconnected \nb)  Different technologies merging and integrating \nc)  Technologies becoming obsolete", 'b'},
+                {"22. What is a key characteristic of disruptive technologies? \na)  Incremental improvements \nb)  Radical changes that overturn existing markets or industries \nc)  Maintaining the status quo", 'b'},
+                {"23. What is technological obsolescence? \na)  Technology becoming more efficient \nb)  Technology becoming outdated and replaced \nc)  Technology becoming more user-friendly", 'b'},
+                {"24. What is the impact of globalization on technology? \na)  No impact \nb)  Increased interconnectedness and collaboration in technological development \nc)  Decreased technological advancements", 'b'},
+                {"25. What is the role of ethics in technological development? \na)  Unimportant \nb)  Essential for responsible innovation and addressing potential societal harms \nc)  Only relevant for certain technologies", 'b'}
+            }},
+        {"NSTP_2", {
+            {"1. A form of child abuse in which an adult or older adolescent abuses a child for sexual simulation? \na) Sexual Abuse \nb) Child Abuse \nc) Physical Abuse", 'a'},
+{"2. A child may worry that the abuser will find and abduct or harm them, or will be very angry and retaliate if they return home? \na) Fear of physical harm to themselves \nb) Helplessness \nc) Guilt or depression", 'a'},
+{"3. Which of the following is NOT a signn of drug abuse? \na) Withdrawal symptoms \nb) Neglecting responsibilities \nc) Regular exercise", 'c'},
+{"4. What major event prompted environmental legislation like the Clean Air Act of 1956? \na) The industrial revolution \nb) The Great Smog of 1952 \nc) The end of WWII", 'b'},
+{"5. What does Republic Act 6955 prohibit? \na) The practice of matching Filipino women with foreign nationals for marriage on a mall-order basis \nb) Domestic partnership \nc) All forms of marriage", 'a'},
+{"6. How can individuals help reduce pollution? \na) By burning trash \nb) By walking or biking instead of driving \nc) By increasing plastic use", 'b'},
+{"7. What is a common heakth risk from drinking polluted water? \na) Skin diseases and dysentery \nb) Improved digestion \nc) Weight loss", 'a'},
+{"8. She has admitted personally using birth-control pills earlier in her life, but refuses to recommend the use of contraceptives. \na) Pres. Rodrigo Duterte \nb) Pres. Gloria Macapagal-Arroyo \nc) 	David Pimentel", 'b'},
+{"9. What is the main reason people start using drugs? \na) To cope with stress or trauma \nb) To enchance social interactions \nc) To experience new things", 'a'},
+{"10. What is the role of trees in pollution control? \na) They absorb noise \nb) They provide carbon monoxide \nc) They provide oxygen and clean the air", 'c'},
+{"11. It is a theory that after the standard of living and life expectancy increase, family sizes and birth rates decline. \na) Demographhic Transition \nb) Environment \nc) Poverty", 'a'},
+{"12. What type of pollution is associated with the use of nuclear power? \na) Light pollution \nb) Chemical pollution \nc) Radioactive pollution", 'c'},
+{"13. It is a condition where an organism's numbers exceed the carrying capacity of its habitat. \na) Resources  \nb) Overpopulation\nc) Poverty", 'b'},
+{"14. Which of the following can be a potential risk factor for developing a substance use disorder? \na) Family history of addiction \nb) Early exposure to drugs \nc) All of the choices", 'c'},
+{"15. What role do genetics play in drug addiction? \na) They completely determine addiction \nb) They can influence susceptibility to addiction \nc) They have no impact", 'b'},
+{"16. It is defined as the failure to provide for the shelter, safety, supervision, and nutritional needs of the child? \na) Emotional abuse \nb) Neglect \nc) Child Abuse", 'b'},
+{"17. Which of the following is a common method for preventing drug abuse in communities? \na) Increased law enforcement \nb) Public stigmatization of users \nc) Education and awareness programs", 'c'},
+{"18. It can be the result of punching, beating, kicking, biting, shaking, or otherwise harming the child's body? \na) Physical Abuse \nb) Child Abuse \nc) Emotional Abuse", 'a'},
+{"19. Which of the following is a common consequence of long term alcohol abuse? \na) Enchanced immune function \nb) Improved memory \nc) Liver disease", 'c'},
+{"20. Child adjustment problems relate more to witnessing than to separation, divorce or the loss of a parent death? \na) Emotional and behavioral abuse \nb) Detachment \nc) Ambivalence", 'a'},
+{"21. It is currently used for fertilizer and transportation for modem agriculture. \na) Resources \nb) Energy \nc) Environment", 'b'},
+{"22. A child who appears not to be bothered or barely notices when there is violence has serious problems and should get help immediately? \na) Detachment \nb) Ambivalence \nc) Feeling responsible for the abuse", 'c'},
+{"23. It is also known as the physical or psychological emotional mistreatment of children? \na) Physical abuse \nb) Sexual abuse \nc) Emotional abuse", 'c'},
+{"24. Why is environmental awareness important? \na) It promotes sustainable practices \nb) It encourages wastefulness \nc) It helps increase pollution", 'a'},
+{"25. It is reinforced if the parents are figthing over the discipline or care of the children? \na) Detachment \nb) Ambivalence \nc) Feeling responsible for the abuse", 'b'}
+        }},
+        {"Discrete_Mathematics", {
+            {}
+        }},
+        {"SCIENCE AND TECHNOLOGY AND SOCIETY",{
+{"1. Which of the following best defines Science? \na) A collection of beliefs \nb) A systematic method of understanding the natural world \nc) A form of entertainment", 'b'},
+{"2. Technology is best described as: \na The application of scientific knowledge for practical purposes \nb) A branch of biology \nc) A political ideology", 'a'},
+{"3. Which ancient civilization is credited with early contributions to astronomy and mathematics? \na) Mesopotamians \nb) Romans \nc) Aztecs", 'a'},
+{"4. The printing press was invented by: \na) Isaac Newton \nb) Johannes Gutenberg \nc) Galileo Galilei", 'b'},
+{"5. Who proposed the heliocentric model of the solar system? \na) Aristotle \nb) Nicolaus Copernicus \nc) Ptolemy", 'b'},
+{"6. Which of these is a direct result of the Industrial Revolution? \na) The invention of the telescope \nb) The rise of factories \nc) The fall of the Roman Empire", 'b'},
+{"7. What is the main concern of bioethics? \na) Astronomy and cosmology \na) Moral implications of biological and medical research \nc) Political science", 'b'},
+{"8. Which modern technology has had the biggest impact on communication? \na) Steam engine \nb) Internet \nc) Microscope", 'b'},
+{"9. CRISPR is a technology used for: \na) Space exploration \nb) Gene editing \nc) Coal mining", 'b'},
+{"10. Which is a positive effect of technology in education? \na) Improved access to information \nb) Less physical activity \nc) Decreased motivation", 'a'},
+{"11. Which philosopher is known for linking science with society through the scientific method? \na) Francis Bacon \nb) Socrates \nc) Karl Marx", 'a'},
+{"12. Which form of energy is renewable? \na) Coal \nb) Natural gas \nc) Solar", 'c'},
+{"13. What is the digital divide? \na) A crack in software \nb) The gap between those who have access to technology and those who do not \nc) The difference between Mac and PC", 'b'},
+{"14. Which technology is used to monitor and collect data on climate change? \na) Typewriter \nb) Satellite imaging \nc) Light bulbs", 'b'},
+{"15. Artificial Intelligence (AI) is primarily used in: \na) Woodworking \nb) Data processing and automation \nc) Pottery", 'b'},
+{"16. The Green Revolution is associated with: \na) Solar panels \nb) Agricultural advancements \nc) Political revolts", 'b'},
+{"17. Which organization is responsible for space exploration in the U.S.? \na) WHO \nb) NASA \nc) WTO", 'b'},
+{"18. Which of these is a major ethical concern in modern tech? \na) Data privacy \nb) Color of smartphones \nc) Internet speed", 'a'},
+{"19. Scientific knowledge is often considered provisional because: \na) It changes with new evidence \nb) It's made up \nc) It’s permanent", 'c'},
+{"20. Social media impacts society by: \na) Only spreading false news \nb) Only entertaining people \nc) Influencing communication, politics, and culture", 'c'},
+{"21. Which ancient technology greatly impacted transportation? \na) Telescope \nb) Electricity \nc) The wheel", 'c'},
+{"22. Which of the following best describes the main goal of Science, Technology, and Society (STS) studies? \na) To improve scientific theories \nb) To explore the interaction between science, technology, and human values \nc) To increase the speed of technological innovation", 'b'},
+{"23. What role does technology play in society according to STS perspectives? \na) It only solves human problems \nb) It passively reflects the progress of science \nc) It shapes and is shaped by social, cultural, and political factors", 'c'},
+{"24. Which invention had the most significant impact on global communication in the 20th century? \na) Steam engine \nb) Internet \nc) Telescope", 'b'},
+{"25. 4. What is one ethical issue commonly discussed in STS when it comes to biotechnology? \na) High costs of production \nb) Speed of scientific development \nc) Genetic modification and its impact on future generations", 'c'}
+        }},
+        {"Art_Appreciation", {
+            {"1.Which artistic movement emphasized intense emotion and subjective experience? \na)  Realism  \nb)  Classicism  \nc)  Romanticism", 'c'},
+{"2.What is the term for the arrangement of elements in a work of art? \na)  Color Palette \nb)  Composition  \nc)  Perspective", 'b'},
+{"3.What is the overall feeling or mood of a work of art often described as? \na) Subject \nb) Form \nc) Atmosphere     ", 'c'},
+{"4.What is the term for the repetition of visual elements in a work of art? \na)  Rhythm \nb)  Harmony  \nc)  Contrast  " , 'a'},
+{"5.What is the term for the relative lightness or darkness of a color?  \na)  Hue \nb)  Saturation  \nc)  Value  ", 'c'},
+{"6.What is the term for the area of the stage closest to the audience? \na) Upstage  \nb) Downstage \nc) Stage Left", 'b'},
+{"7.What is the term for the person who writes the play? \na) Director  nb) Producer  \nc) Playwright ", 'c'},
+{"8.What is a rehearsal? \na) The opening night of a play \nb) A practice session for actors and crew \nc) The final performance ", 'c'},
+{"9.What is the term for a play's overall message or meaning? \na) Plot  \nb) Theme  \nc) Setting", 'b'},
+{"10.What is the term for the highest point of tension or drama in a play? \na) Exposition  \nb) Rising Action \nc) Climax ", 'c'},
+{"11.What type of theater often incorporates music, singing, and dancing? \na) Drama  \nb) Comedy \nc) Musical  ", 'c'},
+{"12.Who is responsible for the overall artistic vision of a theatrical production? \na) Stage Manager \nb) Producer \nc) Directo", 'c'},
+{"13.What is the name for a long speech delivered by a single character on stage? \na) Aside \nb) Soliloquy \nc) Monologue", 'c'},
+{"14.What is the term for the person who oversees all technical aspects of a production? \na) Producer \nb) Director \nc) Stage Manager", 'c'},
+{"15.What is the term for a play's central conflict or problem? \na) Theme \nb) Plot \nc) Setting ", 'b'},
+{"16.What is the term for the objects used on stage during a performance? \na)Costumes \nb) Set \nc) Props ", 'c'},
+{"17.What is the term for the clothing worn by actors during a performance? \na) Props \nb) Set            \nc) Costumes", 'c'},
+{"18.What is the term for the main character in a play? \na) Antagonist \nb) Protagonist \nc) Foil ", 'b'},
+{"19.The Mona Lisa was painted by \na. Michelangelo \nb. Raphael \nc.Leonardo da Vinci", 'c'},
+{"20.Which of the following is a famous Renaissance artist? \na.) Vincent van Gogh \nb.)Pablo Picasso \nc).Leonardo da Vinci ", 'c'},
+{"21.What is the term for a play's setting in time and place? \na) Plot \nb) Theme \nc) Setting", 'c'},
+{"22.What is the term for the written description of a play's setting and characters? \na) Playbill \nb) Stage Directions \nc) Script  ", 'b'},
+{"23.The Last Supper by Leonardo da Vinci is an example of which art period? \na)Renaissance \nb)Baroque \nc)Rococo", 'a'},
+{"24.Which of the following is a famous French artist? \na) Vincent van Gogh \nb) Pablo Picasso \nc) Claude Monet ", 'c'},
+{"25.The Scream by Edvard Munch is an example of which art movement? \na)Expressionism \nb) Cubism \nc)Surrealism ", 'a'}
+        }},
+        {"Computer_Programming",{
+        {"1. Which of the following is a programming language? \na)  HTML \nb)  CSS \nc)  Phyton ", 'c'},
+{"2. What does HTML stand for? \na)  Hyper Text Markup Language \nb)  Hyperlinks and Text Markup Language \nc)  HighText Markup Language ", 'a'},
+{"3. Which of the following is NOT a valid variable name in Python? \na) _var \nb) var1 \nc) 1var ", 'c'},
+{"4. Which of the following operators is used for exponentiation in Python? \na) ^ \nb) ** \nc) // ?", 'b'},
+{"5. IWhat is the purpose of the 'break' statement in a loop?  \na)  It terminates the loop immediately \nb) It skips the current iteration and moves to the next one. \nc) It restarts the loop from the beginning.", 'c'},
+{"6. Which of the following is the correct way to declare a variable in Java? \na) int var = 5; \nb)  var = 5; \nc) 5 = var;", 'a'},
+{"7. What is the correct way to create an object in Java? \na) Object obj = new Object(); \nb) Object obj(); \nc)  new Object obj; ", 'a'},
+{"8. Which of the following is used for exception handling in Java? \na) try-catch \nb)  if-else \nc) begin-except ", 'c'},
+{"9. What does the 'this' keyword refer to in Java? \na) The current class \nb)  The current object \nc) The parent class ", 'b'},
+{"10. Which of the following is NOT a valid loop in C++? \na) for \nb)  loop-for \nc) while ", 'b'},
+{"11. Which operator is used to access a class member in C++? \na) :: \nb) . \nc) // ", 'b'},
+{"12. Which of the following is true about pointers in C? \na)  Pointers store the memory address of variables. \nb) Pointers cannot be dereferenced. \nc) Pointers store actual values. ", 'a'},
+{"13. Which of the following is the correct way to declare an array in C++? \na) int arr[10]; \nb) array arr(10); \nc) int arr{10}; ", 'a'},
+{"14. What is the keyword used to declare a constant in C? \na) const \nb) final \nc) static ", 'a'},
+{"15. What does the 'continue' statement do in a loop? \na) Skips the current iteration and continues with the next iteration. \nb) Exits the loop. \nc) Starts the loop again. ", 'c'},
+{"16.Which of the following is NOT a valid variable name in Java? \na) _var \nb) var1 \nc) 1var ", 'c'},
+{"17. Which header file is needed for printf() function? \na) stdio.h \nb) stdlib.h \nc)  conio.h ", 'a'},
+{"18 Which of the following is not a loop structure in C? \na) for \nb)  do-while \nc) repeat-until ", 'c'},
+{"19.Which one is used to read a single character in C? \na) scanf() \nb)  getchar() \nc)  getch() ", 'b'},
+{"20. Which file extension is used for C++ source code? \na) .cp  \nb) .c++ \nc)  .cpp	 ", 'c'},
+{"21.Which is used to terminate a switch case in C? \na) stop \nb) exit \nc) break ", 'c'},
+{"22.Which of these is not a data type in C? \na) float \nb) real \nc) int ", 'c'},
+{"23.What is the correct way to declare a pointer? \na) int ptr; \nb) int ptr; \nc) ptr int*; ", 'a'},
+{"24.Which keyword is used to create a class in C++? \na) struct \nb) object \nc) class ", 'c'},
+{"25.Which operator is used for concatenation in Java? \na) + \nb) * \nc) & ", 'a'}
+
+        }
+
+        }
+    };
+
 public:
     User getCurrentUser () const {
         return currentUser ;
@@ -233,7 +392,7 @@ public:
 
     void loadProgress() {
     quizScores.clear();
-    string subjects[] = {"Applied_Ethics", "Purposive_Communication", "National_Service_Training_Program_2"};
+    string subjects[] = {"Applied_Ethics", "Purposive_Communication", "NSTP_2", "Discrete_Mathematics", "PATHFIT_2", "FILDIS", "STS", "Art_Appreciation", "Computer_Programming"};
 
     for (const string& subject : subjects) {
         string subjectFileName = currentUser .username + "_" + subject + "_progress.txt";
@@ -300,7 +459,7 @@ void saveAnswersToFile() {
 }
 
     void showProgress() {
-    loadProgress(); // Load the progress at the start
+    loadProgress();
     int i = 1;
 
     clearScreen();
@@ -314,7 +473,7 @@ void saveAnswersToFile() {
     cout << "\t\t||\033[107m----------------------------------------------------------------------\033[101m||" << endl;
 
     int totalScore = 0, totalPossible = 0;
-    string subjects[] = {"Ethics", "PURPOSIVE_COMMUNICATION", "NSTP_2", "Discrete_Mathematics", "PATHFIT_2", "FILDIS", "STS", "Art_Appreciation", "Computer_Programming"};
+    string subjects[] = {"Applied_Ethics", "Purposive_Communication", "NSTP_2", "Discrete_Mathematics", "PATHFIT_2", "FILDIS", "STS", "Art_Appreciation", "Computer_Programming"};
 
     for (const string& subject : subjects) {
         string status;
@@ -362,339 +521,90 @@ void saveAnswersToFile() {
     }
     cout << "\t\t||======================================================================||" << endl;
     cout << "\t\t\033[0m"; // Reset color
+
+    system("pause");
 }
 
+
+
+
+
+
+
+
+
+
+
     void reviewQuiz(const string& subject) {
-
-    map<string, vector<pair<string, char>>> quizQuestions = {
-        {"Ethics", {
-            {"1. Ethics is primarily concerned with: \na)  Legal rules.\ntb)  Moral principles. \nc)  Social customs.", 'b'},
-                {"2. What is a conflict of interest? \na)  A disagreement with a colleague. \nb)  A situation where personal interest clashes with professional duty. \nc)  A misunderstanding at work.", 'c'},
-                {"3. Beneficence means: \na)  Doing no harm. \nb)  Acting for the good of others. \nc)  Being fair.", 'b'},
-                {"4. What is an ethical dilemma? \na)  A simple decision. \nb)  A situation with conflicting moral values. \nc)  A legal problem.", 'b'},
-                {"5. Which is crucial for ethical decision-making? \na)  Ignoring emotions. \nb)  Considering all stakeholders. \nc)  Rushing to judgment.", 'b'},
-                {"6. What is the impact of social media on society? \na)  Only positive. \nb)  Only negative. \nc)  Both positive and negative. ", 'c'},
-                {"7. What is the role of PURPOSIVE COMMUNICATION communication in STS? \na)  Irrelevant. \nb)  Crucial for bridging the gap between PURPOSIVE COMMUNICATION and society. \nc)  Only for scientists.", 'b'},
-                {"8. What is the role of policy in shaping technological development? \na)  No role. \nb)  A significant role in guiding and regulating technological advancements. \nc)  A minor role.", 'b'},
-                {"9. What is a key characteristic of disruptive technologies?\na)  Incremental improvements.\nb)  Radical changes that overturn existing markets or industries.\nc)  Maintaining the status quo.", 'b'},
-                {"10. What is technological obsolescence?\na)  Technology becoming more efficient.\nb)  Technology becoming outdated and replaced.\nc)  Technology becoming more user-friendly.", 'b'},
-                {"11. What is the impact of globalization on technology? \na)  Increased interconnectedness and collaboration in technological development.\nb) No impact.\nc)  Decreased technological advancements.", 'a'},
-                {"12. What is technological obsolescence?\na)  Technology becoming more efficient.\nb)  Technology becoming outdated and replaced.\nc)  Technology becoming more user-friendly.", 'b'},
-                {"13. What is technological obsolescence?\na)  Technology becoming more efficient.\nb)  Technology becoming outdated and replaced.\nc)  Technology becoming more user-friendly.", 'b'}
-            }},
-        {"PURPOSIVE_COMMUNICATION", {
-            {"1. The Scientific Revolution is associated with which period? \na)  Ancient Greece \nb)  The Middle Ages \nc)  The 16th and 17th centuries ?", 'c'},
-                {"2. Which invention revolutionized communication in the 19th century? \na)  The printing press \nb)  The telephone ? \nc)  The internet", 'b'},
-                {"3. The development of the automobile significantly impacted: \na)  Only transportation. \nb)  Urban planning and infrastructure. \nc)  All of the above", 'c'},
-                {"4. What is a major ethical concern regarding genetic engineering? \na)  Increased food production \nb)  Potential for unforeseen consequences \nc)  Improved human health.", 'b'},
-                {"5. The digital divide refers to: \na)  The gap between rich and poor countries \nb)  The unequal access to technology and information \nc) The difference in computer speeds.", 'b'},
-                {"6. Nanotechnology deals with materials at what scale? \na)  Microscopic \nb)  Macroscopic \nc)  Nanoscopic", 'c'},
-                {"7. Biotechnology is primarily concerned with: \na)  The study of rocks \nb)  The manipulation of biological systems \nc)  The study of stars.", 'b'},
-                {"8. Which of these is a potential benefit of artificial intelligence (AI)? \na)  Job displacement \nb)  Improved efficiency and automation \nc)  Increased bias and discrimination", 'b'},
-                {"9. What is a major environmental concern related to technology? \na)  Increased biodiversity \nb)  Pollution and waste generation \nc)  Improved air quality", 'b'},
-                {"10. Sustainable technology aims to: \na)  Maximize economic growth at all costs \nb)  Minimize environmental impact \nc)  Balance economic and environmental needs", 'c'},
-                {"11. The development of renewable energy sources is driven by: \na)  Decreasing fossil fuel prices \nb)  Concerns about climate change \nc)  Increased reliance on fossil fuels", 'b'},
-                {"12. What is a key aspect of responsible innovation? \na)  Ignoring ethical considerations \nb)  Prioritizing economic gains \nc)  Engaging in public dialogue and ethical reflection", 'c'},
-                {"13. What is technological determinism? \na)  Technology shapes society \nb)  Society shapes technology \nc)  Technology and society are independent", 'a'},
-                {"14. What is social constructivism in relation to technology? \na)  Technology is solely determined by its physical properties \nb)  Society shapes the development and use of technology \nc)  Technology develops independently of social forces", 'b'},
-                {"15. What is the impact of social media on society? \na)  Only positive \nb)  Only negative \nc)  Both positive and negative", 'c'},
-                {"16. What is a major concern regarding the use of big data? \na)  Increased efficiency \nb)  Potential for privacy violations \nc)  Improved decision-making", 'b'},
-                {"17. What is the role of PURPOSIVE COMMUNICATION communication in STS? \na)  Irrelevant \nb)  Crucial for bridging the gap between PURPOSIVE COMMUNICATION and society \nc)  Only for scientists", 'b'},
-                {"18. What is technological literacy? \na)  The ability to use technology \nb)  Understanding the societal impacts of technology \nc)  Knowing how to code", 'b'},
-                {"19. What is the relationship between PURPOSIVE COMMUNICATION and technology? \na)  Completely independent \nb)  PURPOSIVE COMMUNICATION informs technology and technology drives further scientific inquiry \nc)  Technology informs PURPOSIVE COMMUNICATION, but PURPOSIVE COMMUNICATION has no impact on technology", 'b'},
-                {"20. What is the role of policy in shaping technological development? \na)  No role \nb)  A significant role in guiding and regulating technological advancements \nc)  A minor role", 'b'},
-                {"21. What is the concept of technological convergence? \na)  Technologies becoming less interconnected \nb)  Different technologies merging and integrating \nc)  Technologies becoming obsolete", 'b'},
-                {"22. What is a key characteristic of disruptive technologies? \na)  Incremental improvements \nb)  Radical changes that overturn existing markets or industries \nc)  Maintaining the status quo", 'b'},
-                {"23. What is technological obsolescence? \na)  Technology becoming more efficient \nb)  Technology becoming outdated and replaced \nc)  Technology becoming more user-friendly", 'b'},
-                {"24. What is the impact of globalization on technology? \na)  No impact \nb)  Increased interconnectedness and collaboration in technological development \nc)  Decreased technological advancements", 'b'},
-                {"25. What is the role of ethics in technological development? \na)  Unimportant \nb)  Essential for responsible innovation and addressing potential societal harms \nc)  Only relevant for certain technologies", 'b'}
-            }},
-        {"NSTP_2", {
-            {"1. A form of child abuse in which an adult or older adolescent abuses a child for sexual simulation? \na) Sexual Abuse \nb) Child Abuse \nc) Physical Abuse", 'a'},
-{"2. A child may worry that the abuser will find and abduct or harm them, or will be very angry and retaliate if they return home? \na) Fear of physical harm to themselves \nb) Helplessness \nc) Guilt or depression", 'a'},
-{"3. Which of the following is NOT a signn of drug abuse? \na) Withdrawal symptoms \nb) Neglecting responsibilities \nc) Regular exercise", 'c'},
-{"4. What major event prompted environmental legislation like the Clean Air Act of 1956? \na) The industrial revolution \nb) The Great Smog of 1952 \nc) The end of WWII", 'b'},
-{"5. What does Republic Act 6955 prohibit? \na) The practice of matching Filipino women with foreign nationals for marriage on a mall-order basis \nb) Domestic partnership \nc) All forms of marriage", 'a'},
-{"6. How can individuals help reduce pollution? \na) By burning trash \nb) By walking or biking instead of driving \nc) By increasing plastic use", 'b'},
-{"7. What is a common heakth risk from drinking polluted water? \na) Skin diseases and dysentery \nb) Improved digestion \nc) Weight loss", 'a'},
-{"8. She has admitted personally using birth-control pills earlier in her life, but refuses to recommend the use of contraceptives. \na) Pres. Rodrigo Duterte \nb) Pres. Gloria Macapagal-Arroyo \nc) 	David Pimentel", 'b'},
-{"9. What is the main reason people start using drugs? \na) To cope with stress or trauma \nb) To enchance social interactions \nc) To experience new things", 'a'},
-{"10. What is the role of trees in pollution control? \na) They absorb noise \nb) They provide carbon monoxide \nc) They provide oxygen and clean the air", 'c'},
-{"11. It is a theory that after the standard of living and life expectancy increase, family sizes and birth rates decline. \na) Demographhic Transition \nb) Environment \nc) Poverty", 'a'},
-{"12. What type of pollution is associated with the use of nuclear power? \na) Light pollution \nb) Chemical pollution \nc) Radioactive pollution", 'c'},
-{"13. It is a condition where an organism's numbers exceed the carrying capacity of its habitat. \na) Resources  \nb) Overpopulation\nc) Poverty", 'b'},
-{"14. Which of the following can be a potential risk factor for developing a substance use disorder? \na) Family history of addiction \nb) Early exposure to drugs \nc) All of the choices", 'c'},
-{"15. What role do genetics play in drug addiction? \na) They completely determine addiction \nb) They can influence susceptibility to addiction \nc) They have no impact", 'b'},
-{"16. It is defined as the failure to provide for the shelter, safety, supervision, and nutritional needs of the child? \na) Emotional abuse \nb) Neglect \nc) Child Abuse", 'b'},
-{"17. Which of the following is a common method for preventing drug abuse in communities? \na) Increased law enforcement \nb) Public stigmatization of users \nc) Education and awareness programs", 'c'},
-{"18. It can be the result of punching, beating, kicking, biting, shaking, or otherwise harming the child's body? \na) Physical Abuse \nb) Child Abuse \nc) Emotional Abuse", 'a'},
-{"19. Which of the following is a common consequence of long term alcohol abuse? \na) Enchanced immune function \nb) Improved memory \nc) Liver disease", 'c'},
-{"20. Child adjustment problems relate more to witnessing than to separation, divorce or the loss of a parent death? \na) Emotional and behavioral abuse \nb) Detachment \nc) Ambivalence", 'a'},
-{"21. It is currently used for fertilizer and transportation for modem agriculture. \na) Resources \nb) Energy \nc) Environment", 'b'},
-{"22. A child who appears not to be bothered or barely notices when there is violence has serious problems and should get help immediately? \na) Detachment \nb) Ambivalence \nc) Feeling responsible for the abuse", 'c'},
-{"23. It is also known as the physical or psychological emotional mistreatment of children? \na) Physical abuse \nb) Sexual abuse \nc) Emotional abuse", 'c'},
-{"24. Why is environmental awareness important? \na) It promotes sustainable practices \nb) It encourages wastefulness \nc) It helps increase pollution", 'a'},
-{"25. It is reinforced if the parents are figthing over the discipline or care of the children? \na) Detachment \nb) Ambivalence \nc) Feeling responsible for the abuse", 'b'}
-        }},
-        {"Discrete_Mathematics", {
-            {}
-        }},
-        {"Art_Appreciation", {
-            {"1.Which artistic movement emphasized intense emotion and subjective experience? \na)  Realism  \nb)  Classicism  \nc)  Romanticism", 'c'},
-{"2.What is the term for the arrangement of elements in a work of art? \na)  Color Palette \nb)  Composition  \nc)  Perspective", 'b'},
-{"3.What is the overall feeling or mood of a work of art often described as? \na) Subject \nb) Form \nc) Atmosphere     ", 'c'},
-{"4.What is the term for the repetition of visual elements in a work of art? \na)  Rhythm \nb)  Harmony  \nc)  Contrast  " , 'a'},
-{"5.What is the term for the relative lightness or darkness of a color?  \na)  Hue \nb)  Saturation  \nc)  Value  ", 'c'},
-{"6.What is the term for the area of the stage closest to the audience? \na) Upstage  \nb) Downstage \nc) Stage Left", 'b'},
-{"7.What is the term for the person who writes the play? \na) Director  nb) Producer  \nc) Playwright ", 'c'},
-{"8.What is a rehearsal? \na) The opening night of a play \nb) A practice session for actors and crew \nc) The final performance ", 'c'},
-{"9.What is the term for a play's overall message or meaning? \na) Plot  \nb) Theme  \nc) Setting", 'b'},
-{"10.What is the term for the highest point of tension or drama in a play? \na) Exposition  \nb) Rising Action \nc) Climax ", 'c'},
-{"11.What type of theater often incorporates music, singing, and dancing? \na) Drama  \nb) Comedy \nc) Musical  ", 'c'},
-{"12.Who is responsible for the overall artistic vision of a theatrical production? \na) Stage Manager \nb) Producer \nc) Directo", 'c'},
-{"13.What is the name for a long speech delivered by a single character on stage? \na) Aside \nb) Soliloquy \nc) Monologue", 'c'},
-{"14.What is the term for the person who oversees all technical aspects of a production? \na) Producer \nb) Director \nc) Stage Manager", 'c'},
-{"15.What is the term for a play's central conflict or problem? \na) Theme \nb) Plot \nc) Setting ", 'b'},
-{"16.What is the term for the objects used on stage during a performance? \na)Costumes \nb) Set \nc) Props ", 'c'},
-{"17.What is the term for the clothing worn by actors during a performance? \na) Props \nb) Set            \nc) Costumes", 'c'},
-{"18.What is the term for the main character in a play? \na) Antagonist \nb) Protagonist \nc) Foil ", 'b'},
-{"19.The Mona Lisa was painted by \na. Michelangelo \nb. Raphael \nc.Leonardo da Vinci", 'c'},
-{"20.Which of the following is a famous Renaissance artist? \na.) Vincent van Gogh \nb.)Pablo Picasso \nc).Leonardo da Vinci ", 'c'},
-{"21.What is the term for a play's setting in time and place? \na) Plot \nb) Theme \nc) Setting", 'c'},
-{"22.What is the term for the written description of a play's setting and characters? \na) Playbill \nb) Stage Directions \nc) Script  ", 'b'},
-{"23.The Last Supper by Leonardo da Vinci is an example of which art period? \na)Renaissance \nb)Baroque \nc)Rococo", 'a'},
-{"24.Which of the following is a famous French artist? \na) Vincent van Gogh \nb) Pablo Picasso \nc) Claude Monet ", 'c'},
-{"25.The Scream by Edvard Munch is an example of which art movement? \na)Expressionism \nb) Cubism \nc)Surrealism ", 'a'}
-        }},
-        {"Computer_Programming",{
-        {"1. Which of the following is a programming language? \na)  HTML \nb)  CSS \nc)  Phyton ", 'c'},
-{"2. What does HTML stand for? \na)  Hyper Text Markup Language \nb)  Hyperlinks and Text Markup Language \nc)  HighText Markup Language ", 'a'},
-{"3. Which of the following is NOT a valid variable name in Python? \na) _var \nb) var1 \nc) 1var ", 'c'},
-{"4. Which of the following operators is used for exponentiation in Python? \na) ^ \nb) ** \nc) // ?", 'b'},
-{"5. IWhat is the purpose of the 'break' statement in a loop?  \na)  It terminates the loop immediately \nb) It skips the current iteration and moves to the next one. \nc) It restarts the loop from the beginning.", 'c'},
-{"6. Which of the following is the correct way to declare a variable in Java? \na) int var = 5; \nb)  var = 5; \nc) 5 = var;", 'a'},
-{"7. What is the correct way to create an object in Java? \na) Object obj = new Object(); \nb) Object obj(); \nc)  new Object obj; ", 'a'},
-{"8. Which of the following is used for exception handling in Java? \na) try-catch \nb)  if-else \nc) begin-except ", 'c'},
-{"9. What does the 'this' keyword refer to in Java? \na) The current class \nb)  The current object \nc) The parent class ", 'b'},
-{"10. Which of the following is NOT a valid loop in C++? \na) for \nb)  loop-for \nc) while ", 'b'},
-{"11. Which operator is used to access a class member in C++? \na) :: \nb) . \nc) // ", 'b'},
-{"12. Which of the following is true about pointers in C? \na)  Pointers store the memory address of variables. \nb) Pointers cannot be dereferenced. \nc) Pointers store actual values. ", 'a'},
-{"13. Which of the following is the correct way to declare an array in C++? \na) int arr[10]; \nb) array arr(10); \nc) int arr{10}; ", 'a'},
-{"14. What is the keyword used to declare a constant in C? \na) const \nb) final \nc) static ", 'a'},
-{"15. What does the 'continue' statement do in a loop? \na) Skips the current iteration and continues with the next iteration. \nb) Exits the loop. \nc) Starts the loop again. ", 'c'},
-{"16.Which of the following is NOT a valid variable name in Java? \na) _var \nb) var1 \nc) 1var ", 'c'},
-{"17. Which header file is needed for printf() function? \na) stdio.h \nb) stdlib.h \nc)  conio.h ", 'a'},
-{"18 Which of the following is not a loop structure in C? \na) for \nb)  do-while \nc) repeat-until ", 'c'},
-{"19.Which one is used to read a single character in C? \na) scanf() \nb)  getchar() \nc)  getch() ", 'b'},
-{"20. Which file extension is used for C++ source code? \na) .cp  \nb) .c++ \nc)  .cpp	 ", 'c'},
-{"21.Which is used to terminate a switch case in C? \na) stop \nb) exit \nc) break ", 'c'},
-{"22.Which of these is not a data type in C? \na) float \nb) real \nc) int ", 'c'},
-{"23.What is the correct way to declare a pointer? \na) int ptr; \nb) int ptr; \nc) ptr int*; ", 'a'},
-{"24.Which keyword is used to create a class in C++? \na) struct \nb) object \nc) class ", 'c'},
-{"25.Which operator is used for concatenation in Java? \na) + \nb) * \nc) & ", 'a'}
-
+        if (quizQuestions.find(subject) == quizQuestions.end()) {
+            cout << "Invalid subject!\n";
+            return;
         }
 
+        clearScreen();
+        cout << "\nReviewing " << subject << " Quiz...\n";
+
+        for (size_t i = 0; i < quizQuestions[subject].size(); ++i) {
+            const auto& q = quizQuestions[subject][i];
+            cout << q.first << "\n";
+            char correctAnswer = q.second;
+
+            char userAnswer = (userAnswers.find(subject) != userAnswers.end() && userAnswers[subject].size() > i)
+                              ? userAnswers[subject][i]
+                              : '\0';
+
+            if (userAnswer == '\0') {
+                cout << "Your answer: Not attempted\n";
+            } else {
+                cout << "Your answer: " << userAnswer << "\n";
+                cout << "Correct answer is: " << correctAnswer << "\n";
+                if (userAnswer == correctAnswer) {
+                    cout << "Feedback: Correct!\n";
+                } else {
+                    cout << "Feedback: Incorrect!\n";
+                }
+            }
+
+            cout << "-----------------------------------\n";
         }
-    };
-    if (quizQuestions.find(subject) == quizQuestions.end()) {
-        cout << "Invalid subject!\n";
-        return;
+
+        cout << "End of review for " << subject << " Quiz.\n";
+        system("pause");
     }
 
-    clearScreen();
-    cout << "\nReviewing " << subject << " Quiz...\n";
+     void takeQuiz(string subject) {
+        if (quizQuestions.find(subject) == quizQuestions.end()) {
+            cout << "Invalid subject!\n";
+            return;
+        }
 
-    for (size_t i = 0; i < quizQuestions[subject].size(); ++i) {
-        const auto& q = quizQuestions[subject][i];
-        cout << q.first << "\n";
-        char correctAnswer = q.second;
+        clearScreen();
+        cout << "\nTaking " << subject << " Quiz...\n";
 
-        char userAnswer = (userAnswers.find(subject) != userAnswers.end() && userAnswers[subject].size() > i)
-                          ? userAnswers[subject][i]
-                          : '\0';
+        int score = 0;
+        char answer;
 
-        if (userAnswer == '\0') {
-            cout << "Your answer: Not attempted\n";
-        } else {
-            cout << "Your answer: " << userAnswer << "\n";
-            cout << "Correct answer is: " << correctAnswer << "\n";
-            if (userAnswer == correctAnswer) {
-                cout << "Feedback: Correct!\n";
-            } else {
-                cout << "Feedback: Incorrect!\n";
+        for (size_t i = 0; i < quizQuestions[subject].size(); i++) {
+            cout << quizQuestions[subject][i].first << "\n";
+            cout << "Your answer: ";
+            cin >> answer;
+
+            // Store user answer
+            userAnswers[subject].resize(quizQuestions[subject].size(), '\0');
+            userAnswers[subject][i] = tolower(answer);
+
+            if (tolower(answer) == quizQuestions[subject][i].second) {
+                score++;
             }
         }
 
-        cout << "-----------------------------------\n";
+        cout << "Quiz completed! Your score: " << score << "/" << quizQuestions[subject].size() << "\n";
+
+        quizScores[subject] = score;
+        saveProgress();
+        saveAnswersToFile();
+        system("pause");
     }
-
-    cout << "End of review for " << subject << " Quiz.\n";
-    system("pause");
-}
-
-     void takeQuiz(string subject) {
-        map<string, vector<pair<string, char>>> quizQuestions = {
-            {"Ethics", {
-{"1. Ethics is primarily concerned with: \na)  Legal rules. \nb)  Moral principles. \nc)  Social customs.", 'b'},
-{"2. What is a conflict of interest? \na)  A disagreement with a colleague. \nb)  A situation where personal interest clashes with professional duty. \nc)  A misunderstanding at work.", 'c'},
-{"3. Beneficence means: \na)  Doing no harm. \nb)  Acting for the good of others. \nc)  Being fair.", 'b'},
-{"4. What is an ethical dilemma? \na)  A simple decision. \nb)  A situation with conflicting moral values. \nc)  A legal problem.", 'b'},
-{"5. Which is crucial for ethical decision-making? \na)  Ignoring emotions. \nb)  Considering all stakeholders. \nc)  Rushing to judgment.", 'b'},
-{"6. What is the impact of social media on society? \na)  Only positive. \nb)  Only negative. \nc)  Both positive and negative. ", 'c'},
-{"7. What is the role of PURPOSIVE COMMUNICATION communication in STS? \na)  Irrelevant. \nb)  Crucial for bridging the gap between PURPOSIVE COMMUNICATION and society. \nc)  Only for scientists.", 'b'},
-{"8. What is the role of policy in shaping technological development? \na)  No role. \nb)  A significant role in guiding and regulating technological advancements. \nc)  A minor role.", 'b'},
-{"9. What is a key characteristic of disruptive technologies?\na)  Incremental improvements.\nb)  Radical changes that overturn existing markets or industries.\nc)  Maintaining the status quo.",'b'},
-{"10. What is technological obsolescence?\na)  Technology becoming more efficient.\nb)  Technology becoming outdated and replaced.\nc)  Technology becoming more user-friendly.",'b'},
-{"11. What is the impact of globalization on technology? \na)  Increased interconnectedness and collaboration in technological development.\nb) No impact.\nc)  Decreased technological advancements.",'a'},
-{"12. What is technological obsolescence?\na)  Technology becoming more efficient.\nb)  Technology becoming outdated and replaced.\nc)  Technology becoming more user-friendly.",'b'},
-{"13. What is technological obsolescence?\na)  Technology becoming more efficient.\nb)  Technology becoming outdated and replaced.\nc)  Technology becoming more user-friendly.",'b'}
-}},
-{"PURPOSIVE_COMMUNICATION", {
-{"1. The Scientific Revolution is associated with which period? \na)  Ancient Greece \nb)  The Middle Ages \nc)  The 16th and 17th centuries ?", 'c'},
-{"2. Which invention revolutionized communication in the 19th century? \na)  The printing press \nb)  The telephone ? \nc)  The internet", 'b'},
-{"3. The development of the automobile significantly impacted: \na)  Only transportation. \nb)  Urban planning and infrastructure. \nc)  All of the above", 'c' },
-{"4. What is a major ethical concern regarding genetic engineering? \na)  Increased food production \nb)  Potential for unforeseen consequences \nc)  Improved human health.", 'b'},
-{"5. The digital divide refers to: \na)  The gap between rich and poor countries \nb)  The unequal access to technology and information \nc) The difference in computer speeds.", 'b'},
-{"6. Nanotechnology deals with materials at what scale? \na)  Microscopic \nb)  Macroscopic \nc)  Nanoscopic", 'c'},
-{"7. Biotechnology is primarily concerned with: \na)  The study of rocks \nb)  The manipulation of biological systems \nc)  The study of stars.", 'b'},
-{"8. Which of these is a potential benefit of artificial intelligence (AI)? \na)  Job displacement \nb)  Improved efficiency and automation \nc)  Increased bias and discrimination", 'b'},
-{"9. What is a major environmental concern related to technology? \na)  Increased biodiversity \nb)  Pollution and waste generation \nc)  Improved air quality", 'b'},
-{"10. Sustainable technology aims to: \na)  Maximize economic growth at all costs \nb)  Minimize environmental impact \nc)  Balance economic and environmental needs", 'c'},
-{"11. The development of renewable energy sources is driven by: \na)  Decreasing fossil fuel prices \nb)  Concerns about climate change \nc)  Increased reliance on fossil fuels", 'b'},
-{"12. What is a key aspect of responsible innovation? \na)  Ignoring ethical considerations \nb)  Prioritizing economic gains \nc)  Engaging in public dialogue and ethical reflection", 'c'},
-{"13. What is technological determinism? \na)  Technology shapes society \nb)  Society shapes technology \nc)  Technology and society are independent", 'a'},
-{"14. What is social constructivism in relation to technology? \na)  Technology is solely determined by its physical properties \nb)  Society shapes the development and use of technology \nc)  Technology develops independently of social forces", 'b'},
-{"15. What is the impact of social media on society? \na)  Only positive \nb)  Only negative \nc)  Both positive and negative", 'c'},
-{"16. What is a major concern regarding the use of big data? \na)  Increased efficiency \nb)  Potential for privacy violations \nc)  Improved decision-making", 'b'},
-{"17. What is the role of PURPOSIVE COMMUNICATION communication in STS? \na)  Irrelevant \nb)  Crucial for bridging the gap between PURPOSIVE COMMUNICATION and society \nc)  Only for scientists", 'b'},
-{"18. What is technological literacy? \na)  The ability to use technology \nb)  Understanding the societal impacts of technology \nc)  Knowing how to code", 'b'},
-{"19. What is the relationship between PURPOSIVE COMMUNICATION and technology? \na)  Completely independent \nb)  PURPOSIVE COMMUNICATION informs technology and technology drives further scientific inquiry \nc)  Technology informs PURPOSIVE COMMUNICATION, but PURPOSIVE COMMUNICATION has no impact on technology", 'b'},
-{"20. What is the role of policy in shaping technological development? \na)  No role \nb)  A significant role in guiding and regulating technological advancements \nc)  A minor role", 'b'},
-{"21. What is the concept of technological convergence? \na)  Technologies becoming less interconnected \nb)  Different technologies merging and integrating \nc)  Technologies becoming obsolete", 'b'},
-{"22. What is a key characteristic of disruptive technologies? \na)  Incremental improvements \nb)  Radical changes that overturn existing markets or industries \nc)  Maintaining the status quo", 'b'},
-{"23. What is technological obsolescence? \na)  Technology becoming more efficient \nb)  Technology becoming outdated and replaced \nc)  Technology becoming more user-friendly", 'b'},
-{"24. What is the impact of globalization on technology? \na)  No impact \nb)  Increased interconnectedness and collaboration in technological development \nc)  Decreased technological advancements", 'b'},
-{"25. What is the role of ethics in technological development? \na)  Unimportant \nb)  Essential for responsible innovation and addressing potential societal harms \nc)  Only relevant for certain technologies", 'b'}
-}},
-{"NSTP_2", {
-{"1. A form of child abuse in which an adult or older adolescent abuses a child for sexual simulation? \na) Sexual Abuse \nb) Child Abuse \nc) Physical Abuse", 'a'},
-{"2. A child may worry that the abuser will find and abduct or harm them, or will be very angry and retaliate if they return home? \na) Fear of physical harm to themselves \nb) Helplessness \nc) Guilt or depression", 'a'},
-{"3. Which of the following is NOT a signn of drug abuse? \na) Withdrawal symptoms \nb) Neglecting responsibilities \nc) Regular exercise", 'c'},
-{"4. What major event prompted environmental legislation like the Clean Air Act of 1956? \na) The industrial revolution \nb) The Great Smog of 1952 \nc) The end of WWII", 'b'},
-{"5. What does Republic Act 6955 prohibit? \na) The practice of matching Filipino women with foreign nationals for marriage on a mall-order basis \nb) Domestic partnership \nc) All forms of marriage", 'a'},
-{"6. How can individuals help reduce pollution? \na) By burning trash \nb) By walking or biking instead of driving \nc) By increasing plastic use", 'b'},
-{"7. What is a common heakth risk from drinking polluted water? \na) Skin diseases and dysentery \nb) Improved digestion \nc) Weight loss", 'a'},
-{"8. She has admitted personally using birth-control pills earlier in her life, but refuses to recommend the use of contraceptives. \na) Pres. Rodrigo Duterte \nb) Pres. Gloria Macapagal-Arroyo \nc) 	David Pimentel", 'b'},
-{"9. What is the main reason people start using drugs? \na) To cope with stress or trauma \nb) To enchance social interactions \nc) To experience new things", 'a'},
-{"10. What is the role of trees in pollution control? \na) They absorb noise \nb) They provide carbon monoxide \nc) They provide oxygen and clean the air", 'c'},
-{"11. It is a theory that after the standard of living and life expectancy increase, family sizes and birth rates decline. \na) Demographhic Transition \nb) Environment \nc) Poverty", 'a'},
-{"12. What type of pollution is associated with the use of nuclear power? \na) Light pollution \nb) Chemical pollution \nc) Radioactive pollution", 'c'},
-{"13. It is a condition where an organism's numbers exceed the carrying capacity of its habitat. \na) Resources  \nb) Overpopulation\nc) Poverty", 'b'},
-{"14. Which of the following can be a potential risk factor for developing a substance use disorder? \na) Family history of addiction \nb) Early exposure to drugs \nc) All of the choices", 'c'},
-{"15. What role do genetics play in drug addiction? \na) They completely determine addiction \nb) They can influence susceptibility to addiction \nc) They have no impact", 'b'},
-{"16. It is defined as the failure to provide for the shelter, safety, supervision, and nutritional needs of the child? \na) Emotional abuse \nb) Neglect \nc) Child Abuse", 'b'},
-{"17. Which of the following is a common method for preventing drug abuse in communities? \na) Increased law enforcement \nb) Public stigmatization of users \nc) Education and awareness programs", 'c'},
-{"18. It can be the result of punching, beating, kicking, biting, shaking, or otherwise harming the child's body? \na) Physical Abuse \nb) Child Abuse \nc) Emotional Abuse", 'a'},
-{"19. Which of the following is a common consequence of long term alcohol abuse? \na) Enchanced immune function \nb) Improved memory \nc) Liver disease", 'c'},
-{"20. Child adjustment problems relate more to witnessing than to separation, divorce or the loss of a parent death? \na) Emotional and behavioral abuse \nb) Detachment \nc) Ambivalence", 'a'},
-{"21. It is currently used for fertilizer and transportation for modem agriculture. \na) Resources \nb) Energy \nc) Environment", 'b'},
-{"22. A child who appears not to be bothered or barely notices when there is violence has serious problems and should get help immediately? \na) Detachment \nb) Ambivalence \nc) Feeling responsible for the abuse", 'c'},
-{"23. It is also known as the physical or psychological emotional mistreatment of children? \na) Physical abuse \nb) Sexual abuse \nc) Emotional abuse", 'c'},
-{"24. Why is environmental awareness important? \na) It promotes sustainable practices \nb) It encourages wastefulness \nc) It helps increase pollution", 'a'},
-{"25. It is reinforced if the parents are figthing over the discipline or care of the children? \na) Detachment \nb) Ambivalence \nc) Feeling responsible for the abuse", 'b'}
-}},
-{"Art_Appreciation", {
-            {"1.Which artistic movement emphasized intense emotion and subjective experience? \na)  Realism  \nb)  Classicism  \nc)  Romanticism", 'c'},
-{"2.What is the term for the arrangement of elements in a work of art? \na)  Color Palette \nb)  Composition  \nc)  Perspective", 'b'},
-{"3.What is the overall feeling or mood of a work of art often described as? \na) Subject \nb) Form \nc) Atmosphere     ", 'c'},
-{"4.What is the term for the repetition of visual elements in a work of art? \na)  Rhythm \nb)  Harmony  \nc)  Contrast  " , 'a'},
-{"5.What is the term for the relative lightness or darkness of a color?  \na)  Hue \nb)  Saturation  \nc)  Value  ", 'c'},
-{"6.What is the term for the area of the stage closest to the audience? \na) Upstage  \nb) Downstage \nc) Stage Left", 'b'},
-{"7.What is the term for the person who writes the play? \na) Director  nb) Producer  \nc) Playwright ", 'c'},
-{"8.What is a rehearsal? \na) The opening night of a play \nb) A practice session for actors and crew \nc) The final performance ", 'c'},
-{"9.What is the term for a play's overall message or meaning? \na) Plot  \nb) Theme  \nc) Setting", 'b'},
-{"10.What is the term for the highest point of tension or drama in a play? \na) Exposition  \nb) Rising Action \nc) Climax ", 'c'},
-{"11.What type of theater often incorporates music, singing, and dancing? \na) Drama  \nb) Comedy \nc) Musical  ", 'c'},
-{"12.Who is responsible for the overall artistic vision of a theatrical production? \na) Stage Manager \nb) Producer \nc) Directo", 'c'},
-{"13.What is the name for a long speech delivered by a single character on stage? \na) Aside \nb) Soliloquy \nc) Monologue", 'c'},
-{"14.What is the term for the person who oversees all technical aspects of a production? \na) Producer \nb) Director \nc) Stage Manager", 'c'},
-{"15.What is the term for a play's central conflict or problem? \na) Theme \nb) Plot \nc) Setting ", 'b'},
-{"16.What is the term for the objects used on stage during a performance? \na)Costumes \nb) Set \nc) Props ", 'c'},
-{"17.What is the term for the clothing worn by actors during a performance? \na) Props \nb) Set            \nc) Costumes", 'c'},
-{"18.What is the term for the main character in a play? \na) Antagonist \nb) Protagonist \nc) Foil ", 'b'},
-{"19.The Mona Lisa was painted by \na. Michelangelo \nb. Raphael \nc.Leonardo da Vinci", 'c'},
-{"20.Which of the following is a famous Renaissance artist? \na.) Vincent van Gogh \nb.)Pablo Picasso \nc).Leonardo da Vinci ", 'c'},
-{"21.What is the term for a play's setting in time and place? \na) Plot \nb) Theme \nc) Setting", 'c'},
-{"22.What is the term for the written description of a play's setting and characters? \na) Playbill \nb) Stage Directions \nc) Script  ", 'b'},
-{"23.The Last Supper by Leonardo da Vinci is an example of which art period? \na)Renaissance \nb)Baroque \nc)Rococo", 'a'},
-{"24.Which of the following is a famous French artist? \na) Vincent van Gogh \nb) Pablo Picasso \nc) Claude Monet ", 'c'},
-{"25.The Scream by Edvard Munch is an example of which art movement? \na)Expressionism \nb) Cubism \nc)Surrealism ", 'a'}
-        }},
-{"Computer_Programming",{
-{"1. Which of the following is a programming language? \na)  HTML \nb)  CSS \nc)  Phyton ", 'c'},
-{"2. What does HTML stand for? \na)  Hyper Text Markup Language \nb)  Hyperlinks and Text Markup Language \nc)  HighText Markup Language ", 'a'},
-{"3. Which of the following is NOT a valid variable name in Python? \na) _var \nb) var1 \nc) 1var ", 'c'},
-{"4. Which of the following operators is used for exponentiation in Python? \na) ^ \nb) ** \nc) // ?", 'b'},
-{"5. IWhat is the purpose of the 'break' statement in a loop?  \na)  It terminates the loop immediately \nb) It skips the current iteration and moves to the next one. \nc) It restarts the loop from the beginning.", 'c'},
-{"6. Which of the following is the correct way to declare a variable in Java? \na) int var = 5; \nb)  var = 5; \nc) 5 = var;", 'a'},
-{"7. What is the correct way to create an object in Java? \na) Object obj = new Object(); \nb) Object obj(); \nc)  new Object obj; ", 'a'},
-{"8. Which of the following is used for exception handling in Java? \na) try-catch \nb)  if-else \nc) begin-except ", 'c'},
-{"9. What does the 'this' keyword refer to in Java? \na) The current class \nb)  The current object \nc) The parent class ", 'b'},
-{"10. Which of the following is NOT a valid loop in C++? \na) for \nb)  loop-for \nc) while ", 'b'},
-{"11. Which operator is used to access a class member in C++? \na) :: \nb) . \nc) // ", 'b'},
-{"12. Which of the following is true about pointers in C? \na)  Pointers store the memory address of variables. \nb) Pointers cannot be dereferenced. \nc) Pointers store actual values. ", 'a'},
-{"13. Which of the following is the correct way to declare an array in C++? \na) int arr[10]; \nb) array arr(10); \nc) int arr{10}; ", 'a'},
-{"14. What is the keyword used to declare a constant in C? \na) const \nb) final \nc) static ", 'a'},
-{"15. What does the 'continue' statement do in a loop? \na) Skips the current iteration and continues with the next iteration. \nb) Exits the loop. \nc) Starts the loop again. ", 'c'},
-{"16.Which of the following is NOT a valid variable name in Java? \na) _var \nb) var1 \nc) 1var ", 'c'},
-{"17. Which header file is needed for printf() function? \na) stdio.h \nb) stdlib.h \nc)  conio.h ", 'a'},
-{"18 Which of the following is not a loop structure in C? \na) for \nb)  do-while \nc) repeat-until ", 'c'},
-{"19.Which one is used to read a single character in C? \na) scanf() \nb)  getchar() \nc)  getch() ", 'b'},
-{"20. Which file extension is used for C++ source code? \na) .cp  \nb) .c++ \nc)  .cpp	 ", 'c'},
-{"21.Which is used to terminate a switch case in C? \na) stop \nb) exit \nc) break ", 'c'},
-{"22.Which of these is not a data type in C? \na) float \nb) real \nc) int ", 'c'},
-{"23.What is the correct way to declare a pointer? \na) int ptr; \nb) int ptr; \nc) ptr int*; ", 'a'},
-{"24.Which keyword is used to create a class in C++? \na) struct \nb) object \nc) class ", 'c'},
-{"25.Which operator is used for concatenation in Java? \na) + \nb) * \nc) & ", 'a'},
-}
-
-}
-};
-
-        if (quizQuestions.find(subject) == quizQuestions.end()) {
-        cout << "Invalid subject!\n";
-        return;
-    }
-
-    clearScreen();
-    cout << "\nTaking " << subject << " Quiz...\n";
-
-    int score = 0;
-    char answer;
-
-    for (size_t i = 0; i < quizQuestions[subject].size(); i++) {
-        cout << quizQuestions[subject][i].first << "\n";
-        cout << "Your answer: ";
-        cin >> answer;
-
-        if (userAnswers.find(subject) == userAnswers.end()) {
-            userAnswers[subject] = vector<char>(quizQuestions[subject].size(), '\0');
-        }
-        userAnswers[subject][i] = tolower(answer);
-
-        if (tolower(answer) == quizQuestions[subject][i].second) {
-            score++;
-        }
-    }
-
-    cout << "Quiz completed! Your score: " << score << "/" << quizQuestions[subject].size() << "\n";
-
-    quizScores[subject] = score;
-    saveProgress();
-    saveAnswersToFile();
-    system("pause");
-}
 
 
     void viewAccountInformation() {
@@ -855,11 +765,13 @@ cout << "\t\t\033[30;101m||=====================================================
                         cin >> subChoice;
                         if (subChoice == 1) quizSys.showProgress();
                         else if (subChoice == 2) {
-                            string subjects[] = {"Ethics", "PURPOSIVE_COMMUNICATION", "ESP","Art_Appreciation"};
+                            string subjects[] = {"Applied_Ethics", "Purposive_Communication", "NSTP_2", "Discrete_Mathematics", "PATHFIT_2", "FILDIS", "STS", "Art_Appreciation", "Computer_Programming"};
                             int quizNum;
-                            cout << "\nChoose Quiz (1. Ethics, 2. PURPOSIVE_COMMUNICATION, 3. ESP, 4. Art_Appreciation): ";
+                            quizSys.clearScreen();
+                            cout << "\t\t\033[30;101m                                                              "<<endl;
+                            cout << "\t\t  \033[107m                     Choose Quiz                          \033[101m  ";
                             cin >> quizNum;
-                            if (quizNum >= 1 && quizNum <= 3) {
+                            if (quizNum >= 1 && quizNum <= 9) {
                                 quizSys.takeQuiz(subjects[quizNum - 1]);
                             } else {
                                 cout << "Invalid\n";
