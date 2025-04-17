@@ -3,6 +3,7 @@
 #include <string>
 #include <map>
 #include <windows.h>
+#include <algorithm>
 #include <iomanip>
 #include <vector>
 #include <ctime>
@@ -28,170 +29,503 @@ private:
 
     map<string, vector<pair<string, char>>> quizQuestions = {
         {"Applied_Ethics", {
-            {"1. Ethics is primarily concerned with: \na)  Legal rules.\ntb)  Moral principles. \nc)  Social customs.", 'b'},
+            {"1. Ethics is primarily concerned with: \na)  Legal rules.\nb)  Moral principles. \nc)  Social customs.", 'b'},
+
                 {"2. What is a conflict of interest? \na)  A disagreement with a colleague. \nb)  A situation where personal interest clashes with professional duty. \nc)  A misunderstanding at work.", 'c'},
+
                 {"3. Beneficence means: \na)  Doing no harm. \nb)  Acting for the good of others. \nc)  Being fair.", 'b'},
+
                 {"4. What is an ethical dilemma? \na)  A simple decision. \nb)  A situation with conflicting moral values. \nc)  A legal problem.", 'b'},
+
                 {"5. Which is crucial for ethical decision-making? \na)  Ignoring emotions. \nb)  Considering all stakeholders. \nc)  Rushing to judgment.", 'b'},
+
                 {"6. What is the impact of social media on society? \na)  Only positive. \nb)  Only negative. \nc)  Both positive and negative. ", 'c'},
+
                 {"7. What is the role of PURPOSIVE COMMUNICATION communication in STS? \na)  Irrelevant. \nb)  Crucial for bridging the gap between PURPOSIVE COMMUNICATION and society. \nc)  Only for scientists.", 'b'},
+
                 {"8. What is the role of policy in shaping technological development? \na)  No role. \nb)  A significant role in guiding and regulating technological advancements. \nc)  A minor role.", 'b'},
+
                 {"9. What is a key characteristic of disruptive technologies?\na)  Incremental improvements.\nb)  Radical changes that overturn existing markets or industries.\nc)  Maintaining the status quo.", 'b'},
+
                 {"10. What is technological obsolescence?\na)  Technology becoming more efficient.\nb)  Technology becoming outdated and replaced.\nc)  Technology becoming more user-friendly.", 'b'},
+
                 {"11. What is the impact of globalization on technology? \na)  Increased interconnectedness and collaboration in technological development.\nb) No impact.\nc)  Decreased technological advancements.", 'a'},
+
                 {"12. What is technological obsolescence?\na)  Technology becoming more efficient.\nb)  Technology becoming outdated and replaced.\nc)  Technology becoming more user-friendly.", 'b'},
-                {"13. What is technological obsolescence?\na)  Technology becoming more efficient.\nb)  Technology becoming outdated and replaced.\nc)  Technology becoming more user-friendly.", 'b'}
+
+                {"13. What is technological obsolescence?\na)  Technology becoming more efficient.\nb)  Technology becoming outdated and replaced.\nc)  Technology becoming more user-friendly.", 'b'},
+
+                {"14. What is moral relativism? \na)  Ethics is absolute and universal \nb)  Ethics depend on the culture or individual \nc) Ethics is science-based", 'b'},
+
+{"15 According to Kant, moral actions must be: \na)  Based on emotions \nb)  In pursuit of happiness \nc) Performed out of duty", 'c'},
+
+{"16. The main idea of egoism is: \na)  Altruism \nb)  Others' welfare \nc) Self-interest", 'c'},
+
+{"17. Which ethical theory focuses on character and virtues? \na)  Utilitarianism \nb)  Deontology \nc) Virtue ethics", 'c'},
+
+{"18. Which of the following is NOT considered a moral virtue? \na)  Honesty \nb)  Courage \nc) Greed", 'c'},
+
+{"19. In ethics, autonomy refers to: \na)  Following orders \nb)  Making one's own decisions \nc)  Disregarding laws", 'b'},
+
+{"20. Who proposed the harm principle? \na)  John Stuart Mill \nb)  Aristotle \nc) Immanuel Kant", 'a'},
+
+{"21. Which is an example of a deontological action? \na)  Lying to save someone \nb)  Following the rules regardless of outcome \nc) Maximizing benefits", 'b'},
+
+{"22. Which philosopher is known for the concept of the “categorical imperative”? \na)  Bentham \nb)  Mill \nc) Kant", 'c'},
+
+{"23. In ethical decision-making, integrity means: \na)  Doing what is easy \nb)  Following orders \nc) Being honest and principled", 'c'},
+
+{"24. Which ethical theory uses a cost-benefit analysis? \na)  Deontology \nb)  Virtue ethics \nc) Utilitarianism", 'c'},
+
+{"25. Which is an ethical concern in data collection? \na)  Storage space \nb)  Cost \nc) Privacy", 'c'},
+
             }},
         {"Purposive_Communication", {
             {"1. The Scientific Revolution is associated with which period? \na)  Ancient Greece \nb)  The Middle Ages \nc)  The 16th and 17th centuries ?", 'c'},
+
                 {"2. Which invention revolutionized communication in the 19th century? \na)  The printing press \nb)  The telephone ? \nc)  The internet", 'b'},
+
                 {"3. The development of the automobile significantly impacted: \na)  Only transportation. \nb)  Urban planning and infrastructure. \nc)  All of the above", 'c'},
+
                 {"4. What is a major ethical concern regarding genetic engineering? \na)  Increased food production \nb)  Potential for unforeseen consequences \nc)  Improved human health.", 'b'},
+
                 {"5. The digital divide refers to: \na)  The gap between rich and poor countries \nb)  The unequal access to technology and information \nc) The difference in computer speeds.", 'b'},
+
                 {"6. Nanotechnology deals with materials at what scale? \na)  Microscopic \nb)  Macroscopic \nc)  Nanoscopic", 'c'},
+
                 {"7. Biotechnology is primarily concerned with: \na)  The study of rocks \nb)  The manipulation of biological systems \nc)  The study of stars.", 'b'},
+
                 {"8. Which of these is a potential benefit of artificial intelligence (AI)? \na)  Job displacement \nb)  Improved efficiency and automation \nc)  Increased bias and discrimination", 'b'},
+
                 {"9. What is a major environmental concern related to technology? \na)  Increased biodiversity \nb)  Pollution and waste generation \nc)  Improved air quality", 'b'},
+
                 {"10. Sustainable technology aims to: \na)  Maximize economic growth at all costs \nb)  Minimize environmental impact \nc)  Balance economic and environmental needs", 'c'},
+
                 {"11. The development of renewable energy sources is driven by: \na)  Decreasing fossil fuel prices \nb)  Concerns about climate change \nc)  Increased reliance on fossil fuels", 'b'},
+
                 {"12. What is a key aspect of responsible innovation? \na)  Ignoring ethical considerations \nb)  Prioritizing economic gains \nc)  Engaging in public dialogue and ethical reflection", 'c'},
+
                 {"13. What is technological determinism? \na)  Technology shapes society \nb)  Society shapes technology \nc)  Technology and society are independent", 'a'},
+
                 {"14. What is social constructivism in relation to technology? \na)  Technology is solely determined by its physical properties \nb)  Society shapes the development and use of technology \nc)  Technology develops independently of social forces", 'b'},
+
                 {"15. What is the impact of social media on society? \na)  Only positive \nb)  Only negative \nc)  Both positive and negative", 'c'},
+
                 {"16. What is a major concern regarding the use of big data? \na)  Increased efficiency \nb)  Potential for privacy violations \nc)  Improved decision-making", 'b'},
+
                 {"17. What is the role of PURPOSIVE COMMUNICATION communication in STS? \na)  Irrelevant \nb)  Crucial for bridging the gap between PURPOSIVE COMMUNICATION and society \nc)  Only for scientists", 'b'},
+
                 {"18. What is technological literacy? \na)  The ability to use technology \nb)  Understanding the societal impacts of technology \nc)  Knowing how to code", 'b'},
+
                 {"19. What is the relationship between PURPOSIVE COMMUNICATION and technology? \na)  Completely independent \nb)  PURPOSIVE COMMUNICATION informs technology and technology drives further scientific inquiry \nc)  Technology informs PURPOSIVE COMMUNICATION, but PURPOSIVE COMMUNICATION has no impact on technology", 'b'},
+
                 {"20. What is the role of policy in shaping technological development? \na)  No role \nb)  A significant role in guiding and regulating technological advancements \nc)  A minor role", 'b'},
+
                 {"21. What is the concept of technological convergence? \na)  Technologies becoming less interconnected \nb)  Different technologies merging and integrating \nc)  Technologies becoming obsolete", 'b'},
+
                 {"22. What is a key characteristic of disruptive technologies? \na)  Incremental improvements \nb)  Radical changes that overturn existing markets or industries \nc)  Maintaining the status quo", 'b'},
+
                 {"23. What is technological obsolescence? \na)  Technology becoming more efficient \nb)  Technology becoming outdated and replaced \nc)  Technology becoming more user-friendly", 'b'},
+
                 {"24. What is the impact of globalization on technology? \na)  No impact \nb)  Increased interconnectedness and collaboration in technological development \nc)  Decreased technological advancements", 'b'},
+
                 {"25. What is the role of ethics in technological development? \na)  Unimportant \nb)  Essential for responsible innovation and addressing potential societal harms \nc)  Only relevant for certain technologies", 'b'}
             }},
         {"NSTP_2", {
+
             {"1. A form of child abuse in which an adult or older adolescent abuses a child for sexual simulation? \na) Sexual Abuse \nb) Child Abuse \nc) Physical Abuse", 'a'},
+
 {"2. A child may worry that the abuser will find and abduct or harm them, or will be very angry and retaliate if they return home? \na) Fear of physical harm to themselves \nb) Helplessness \nc) Guilt or depression", 'a'},
+
 {"3. Which of the following is NOT a signn of drug abuse? \na) Withdrawal symptoms \nb) Neglecting responsibilities \nc) Regular exercise", 'c'},
+
 {"4. What major event prompted environmental legislation like the Clean Air Act of 1956? \na) The industrial revolution \nb) The Great Smog of 1952 \nc) The end of WWII", 'b'},
+
 {"5. What does Republic Act 6955 prohibit? \na) The practice of matching Filipino women with foreign nationals for marriage on a mall-order basis \nb) Domestic partnership \nc) All forms of marriage", 'a'},
+
 {"6. How can individuals help reduce pollution? \na) By burning trash \nb) By walking or biking instead of driving \nc) By increasing plastic use", 'b'},
+
 {"7. What is a common heakth risk from drinking polluted water? \na) Skin diseases and dysentery \nb) Improved digestion \nc) Weight loss", 'a'},
+
 {"8. She has admitted personally using birth-control pills earlier in her life, but refuses to recommend the use of contraceptives. \na) Pres. Rodrigo Duterte \nb) Pres. Gloria Macapagal-Arroyo \nc) 	David Pimentel", 'b'},
+
 {"9. What is the main reason people start using drugs? \na) To cope with stress or trauma \nb) To enchance social interactions \nc) To experience new things", 'a'},
+
 {"10. What is the role of trees in pollution control? \na) They absorb noise \nb) They provide carbon monoxide \nc) They provide oxygen and clean the air", 'c'},
+
 {"11. It is a theory that after the standard of living and life expectancy increase, family sizes and birth rates decline. \na) Demographhic Transition \nb) Environment \nc) Poverty", 'a'},
+
 {"12. What type of pollution is associated with the use of nuclear power? \na) Light pollution \nb) Chemical pollution \nc) Radioactive pollution", 'c'},
+
 {"13. It is a condition where an organism's numbers exceed the carrying capacity of its habitat. \na) Resources  \nb) Overpopulation\nc) Poverty", 'b'},
+
 {"14. Which of the following can be a potential risk factor for developing a substance use disorder? \na) Family history of addiction \nb) Early exposure to drugs \nc) All of the choices", 'c'},
+
 {"15. What role do genetics play in drug addiction? \na) They completely determine addiction \nb) They can influence susceptibility to addiction \nc) They have no impact", 'b'},
+
 {"16. It is defined as the failure to provide for the shelter, safety, supervision, and nutritional needs of the child? \na) Emotional abuse \nb) Neglect \nc) Child Abuse", 'b'},
+
 {"17. Which of the following is a common method for preventing drug abuse in communities? \na) Increased law enforcement \nb) Public stigmatization of users \nc) Education and awareness programs", 'c'},
+
 {"18. It can be the result of punching, beating, kicking, biting, shaking, or otherwise harming the child's body? \na) Physical Abuse \nb) Child Abuse \nc) Emotional Abuse", 'a'},
+
 {"19. Which of the following is a common consequence of long term alcohol abuse? \na) Enchanced immune function \nb) Improved memory \nc) Liver disease", 'c'},
+
 {"20. Child adjustment problems relate more to witnessing than to separation, divorce or the loss of a parent death? \na) Emotional and behavioral abuse \nb) Detachment \nc) Ambivalence", 'a'},
+
 {"21. It is currently used for fertilizer and transportation for modem agriculture. \na) Resources \nb) Energy \nc) Environment", 'b'},
+
 {"22. A child who appears not to be bothered or barely notices when there is violence has serious problems and should get help immediately? \na) Detachment \nb) Ambivalence \nc) Feeling responsible for the abuse", 'c'},
+
 {"23. It is also known as the physical or psychological emotional mistreatment of children? \na) Physical abuse \nb) Sexual abuse \nc) Emotional abuse", 'c'},
+
 {"24. Why is environmental awareness important? \na) It promotes sustainable practices \nb) It encourages wastefulness \nc) It helps increase pollution", 'a'},
+
 {"25. It is reinforced if the parents are figthing over the discipline or care of the children? \na) Detachment \nb) Ambivalence \nc) Feeling responsible for the abuse", 'b'}
+
         }},
         {"Discrete_Mathematics", {
-            {}
+
+            {"1. What is the cardinality of the set {1, 2, 3, 4}? \na)  3 \nb)  4 \nc) 5", 'b'},
+
+{"2. What is the result of 2 ? 0 in Boolean logic? \na)  0 \nb)  1 \nc) 2", 'a'},
+
+{"3. What is the power set of {a, b}? \na)  {{a}, {b}} \nb)  {a, b, {a, b}} \nc) {Ø, {a}, {b}, {a, b}} [?]", 'c'},
+
+{"4. What is the cardinality of the set {1, 2, 3, 4}? \na)  3 \nb)  4 \nc) 5", 'b'},
+
+{"5. Which is an example of a tautology? \na)  p ? ¬p  \nb)  p ? ¬p \nc) p ? q", 'a'},
+
+{"6. In set theory, what does Ø represent?  \na)  A singleton \nb)  The empty set \nc) A universal set", 'b'},
+
+{"7. What is the result of ¬(1 ? 0)? \na)  0 \nb)  1 \nc) 2", 'b'},
+
+{"8. A function f: A ? B is injective if: \na)  Every element of A maps to a unique element of B \nb)  Every element of B has an image \nc) It is a one-to-many function", 'a'},
+
+{"9. What does the union of sets A and B contain? \na)  Only common elements \nb)  All elements in A or B or both \nc) Only elements in A not in B", 'b'},
+
+{"10. What is the binary equivalent of decimal 10? \na)  1000 \nb)  1010 \nc) 1010", 'c'},
+
+{"11. What is a graph with no cycles called? \na)  Multigraph \nb)  Tree \nc) Complete graph", 'b'},
+
+{"12. Which is a valid logical equivalence? \na)  p ? q = p ? q \nb)  p ? q = ¬p ? q [?] \nc) p ? ¬q = p ? q", 'b'},
+
+{"13. What is the degree of a vertex in a graph? \na)  Number of edges in the graph \nb)  Number of edges incident to the vertex \nc) Number of vertices in the graph", 'b'},
+
+{"14. Which is a characteristic of a bipartite graph? \na)  Contains self-loops \nb)  Has cycles of odd length \nc) Vertices can be split into two sets with no internal edges", 'c'},
+
+{"15. The number of edges in a complete graph with n vertices is: \na)  n \nb)  n(n - 1)/2 \nc) 2n", 'b'},
+
+{"16. Which of the following is an example of a relation that is symmetric? \na)  “is greater than” \nb)  “is a sibling of” \nc) “is the parent of”", 'b'},
+
+{"17. What does a truth table display? \na)  All possible truth values of logical statements \nb)  Set of all elements \nc) Types of graphs", 'a'},
+
+{"18. What does p ? q mean in logic? \na)  p or q \nb)  p and q \nc) not p and not q", 'b'},
+
+{"19. How many subsets does a set with 3 elements have? \na)  6 \nb)  8 \nc) 9", 'b'},
+
+{"20. What is an example of a transitive relation? \na)  “is a friend of” \nb)  “is greater than” \nc) “is different from”", 'b'},
+
+{"21. Which is a valid method of mathematical proof? \na)  Experimental proof \nb)  Proof by contradiction \nc) Guess and check", 'b'},
+
+{"22. What is the inverse of the conditional p ? q? \na)  ¬q ? ¬p \nb)  q ? p \nc) p ? ¬q", 'a'},
+
+{"23. What kind of graph has every pair of vertices connected by an edge? \na)  Tree \nb)  Complete graph \nc) Bipartite graph", 'b'},
+
+{"24. A recursive function is defined in terms of: \na)  Itself \nb)  Another unrelated function \nc) Loops", 'a'},
+
+{"25. Which algorithm is used to find the shortest path in a graph? \na)  Prim’s algorithm \nb)  Dijkstra’s algorithm \nc) Kruskal’s algorithm", 'b'}
+
         }},
-        {"SCIENCE AND TECHNOLOGY AND SOCIETY",{
+        {"PATHFIT_2",{
+
+{"1. What is the main focus of PathFit 2? \na) Weightlifting \nb) Dance and fitness \nc) Martial arts", 'b'},
+
+{"2. Which is NOT a benefit of dance fitness? \na) Improved cardiovascular health \nb)  Increased flexibility \nc) Muscle hypertrophy like bodybuilding", 'c'},
+
+{"3. What type of dance is commonly used in Zumba? \na)  Ballet \nb)  Jazz \nc) Latin", 'c'},
+
+{"4. How does dance contribute to mental wellness? \na)  Increases stress \nb)  Releases endorphins \nc) Reduces memory retention", 'b'},
+
+{"5. What should you wear during a dance fitness class? \na)  Tight jeans \nb)  Formal attire \nc) Comfortable activewear", 'c'},
+
+{"6. Which is an example of aerobic dance? \na)  Yoga \nb)  Tap dance \nc) Hip-hop", 'c'},
+
+{"7. What is the main energy source in high-intensity dance workouts? \na)  Protein \nb)  Carbohydrates \nc) Vitamins", 'b'},
+
+{"8. Recommended weekly moderate-intensity activity for adults is: \na)  60 minutes \nb) 150 minutes \nc) 200 minutes", 'b'},
+
+{"9. Which term refers to how often you exercise? \na)  Frequency \nb)  Time \nc) Type", 'a'},
+
+{"10. What does BMI stand for? \na) Body Movement Index \nb)  Body Mass Index \nc) Body Metabolism Indicator", 'b'},
+
+{"11. Which is NOT a component of fitness? \na)  Flexibility \nb)  Sleep duration \nc) Muscular strength", 'b'},
+
+{"12. Best type of stretching before a dance workout is: \na)  Static stretching \nb)  Dynamic stretching \nc) Passive stretching", 'b'},
+
+{"13. What is the purpose of a cool-down? \na)  Burn more calories \nb)  Tighten muscles \nc) Prevent injury and aid recovery", 'c'},
+
+{"14. Which dance originated from the Dominican Republic? \na)  Salsa \nb)  Waltz \nc) Bachata", 'c'},
+
+{"15. What do we call the number of times you do an exercise? \na)  Repetition \nb)  Circuit \nc) Interval", 'a'},
+
+{"16. Which system benefits most from dance workouts? \na)  Skeletal \nb)  Digestive \nc) Cardiovascular", 'c'},
+
+{"17. What does the “I” in FITT stand for? \na)  Intake \nb)  Intensity \nc) Impact", 'b'},
+
+{"18. Which dance fitness program includes martial arts moves? \na)  Yoga \nb)  Zumba \nc) Cardio kickboxing", 'c'},
+
+{"19. Most important nutrient for muscle repairs? \na)  Protein \nb)  Fiber \nc) Water", 'a'},
+
+{"20. Sign of overexertion during workouts? \na)  Dizziness or chest pain \nb)  Increased focus \nc) Motivation boost", 'a'},
+
+{"21. Which dance is in street dance fitness? \na)  Hip-hop \nb)  Ballet \nc) Contemporary", 'a'},
+
+{"22. How often should adults do strength activities? \na)  Once a month \nb)  Once a week \nc) Twice a week", 'c'},
+
+{"23. Best test to measure flexibility? \na)  Jump test \nb)  Sit-and-reach test \nc) BMI test", 'b'},
+
+{"24. Effect of regular aerobic exercise on the heart? \na)  Increases heart rate \nb)  Improves efficiency and lowers heart rate \nc) Causes palpitations", 'b'},
+
+{"25. Which is a low-impact dance workout? \na)  Powerlifting \nb)  Low-impact Zumba \nc) Plyometrics", 'b'}
+
+            }
+        },
+
+        {"FILDIS",{
+
+            {"1. Ano ang pangunahing layunin ng asignaturang “Filipino sa Disiplina”? \nA. Matutong magsalita ng ibang wika \nB. Magamit ang wikang Filipino sa iba’t ibang larangan \nC. Magsulat ng panitikan", 'b'},
+
+    {"2. Alin sa mga sumusunod ang halimbawa ng teknikal na sulatin? \nA. Maikling kwento \nB. Ulat-panlaboratoryo \nC. Tula", 'b'},
+
+    {"3. Anong larangan ang gumagamit ng mga terminong gaya ng ekonomiya, GDP, at inflasyon? \nA. Ekonomiks \nB. Heograpiya \nC. Kasaysayan", 'a'},
+
+    {"4. Ang pagsasalin ng terminolohiya sa agham ay tinatawag na: \nA. Pagsipi \nB. Pagbabalangkas \nC. Lokalisasyon", 'c'},
+
+    {"5. Anong uri ng sulatin ang nagpapaliwanag gamit ang lohika at datos? \nA. Akademikong sulatin \nB. Malikhaing sulatin \nC. Balitang pampulitika", 'a'},
+
+    {"6. Sa anong larangan ginagamit ang salitang “mitosis”, “DNA”, at “selula”? \nA. Agham \nB. Panitikan \nC. Ekonomiks", 'a'},
+
+    {"7. Ano ang tawag sa Filipino na ginagamit sa batas? \nA. Wikang teknikal \nB. Wikang opisyal \nC. Wikang balbal", 'b'},
+
+    {"8. Alin sa mga sumusunod ang hindi kabilang sa disiplina ng agham panlipunan? \nA. Sosyolohiya \nB. Astronomiya \nC. Antropolohiya", 'b'},
+
+    {"9. Anong disiplina ang nakatuon sa mga karanasan at paniniwala ng tao? \nA. Humanidades \nB. Siyensiya \nC. Inhinyeriya", 'a'},
+
+    {"10. Ano ang layunin ng pagsasalin sa wikang Filipino sa akademikong disiplina? \nA. Maunawaan ng mas maraming Pilipino ang nilalaman \nB. Pataasin ang halaga ng Ingles \nC. Maiwasan ang pag-aaral ng agham", 'a'},
+
+    {"11. Alin ang tamang gamit ng Filipino sa larangan ng medisina? \nA. Pakikipagdebate \nB. Paggamit ng payak at malinaw na wika sa pasyente \nC. Paggamit ng jargon sa lahat ng oras", 'b'},
+
+    {"12. Alin sa sumusunod ang halimbawang gamit ng Filipino sa larangan ng teknolohiya? \nA. Talambuhay \nB. Manwal ng paggamit \nC. Nobela", 'b'},
+
+    {"13. Ano ang ibig sabihin ng “pagpapalalim ng wika sa disiplina”? \nA. Pagpapalit ng wika \nB. Pagsasama ng mga teknikal na termino sa konteksto ng Filipino \nC. Pag-iwas sa banyagang wika", 'b'},
+
+    {"14. Alin ang hindi kabilang sa teknikal-bokasyunal na larangan? \nA. Mekanika \nB. Agrikultura \nC. Panulaan", 'c'},
+
+    {"15. Anong disiplina ang tumatalakay sa batas, katarungan at pamahalaan? \nA. Inhinyeriya \nB. Medisina \nC. Agham Pampulitika", 'c'},
+
+    {"16. Anong disiplina ang gumagamit ng terminong “pananampalataya” at “ritwal”? \nA. Relihiyon \nB. Pisika \nC. Ekonomiks", 'a'},
+
+    {"17. Paano naiiba ang pagsulat sa agham sa pagsulat sa humanidades? \nA. Pareho ang istilo \nB. Ang agham ay mas lohikal at teknikal \nC. Mas maraming tayutay sa agham", 'b'},
+
+    {"18. Bakit mahalaga ang wikang Filipino sa disiplina? \nA. Para hindi na mag-Ingles \nB. Para mapababa ang kalidad ng edukasyon \nC. Para sa inklusibong pagkatuto ng lahat ng Pilipino", 'c'},
+
+    {"19. Alin ang wastong gamit ng Filipino sa larangan ng agham panlipunan? \nA. Paggamit ng slang \nB. Pagg gamit ng makabuluhang konsepto sa lokal na konteksto \nC. Pagtuturo sa Ingles lang", 'b'},
+
+    {"20. Ano ang layunin ng akademikong pagsulat? \nA. Mambola \nB. Magpahayag ng malinaw at makatuwirang ideya \nC. Magsulat ng tula", 'b'},
+
+    {"21. Sa anong larangan ginagamit ang “blueprint” at “istraktura”? \nA. Panitikan \nB. Arkitektura \nC. Sining Biswal", 'b'},
+
+    {"22. Paano ginagamit ang wika sa larangan ng edukasyon? \nA. Bilang midyum ng pagtuturo at pagkatuto \nB. Bilang pampalipas oras \nC. Bilang dekorasyon", 'a'},
+
+    {"23. Ano ang papel ng Filipino sa globalisasyon? \nA. Pagpapahayag ng lokal na identidad sa pandaigdigang antas \nB. Paglimot sa kultura \nC. Pagtuturo ng banyagang salita", 'a'},
+
+    {"24. Ano ang ibig sabihin ng terminong \"interdisiplinaryo\"? \nA. Isa lang ang disiplina \nB. Pagsasanib ng iba't ibang larangan \nC. Pag-iwas sa ibang asignatura", 'b'},
+
+    {"25. Anong uri ng Filipino ang angkop sa agham at teknolohiya? \nA. Balbal \nB. Filipino na teknikal at payak \nC. Poetiko", 'b'}
+
+            }
+
+        },
+
+        {"STS",{
+
 {"1. Which of the following best defines Science? \na) A collection of beliefs \nb) A systematic method of understanding the natural world \nc) A form of entertainment", 'b'},
+
 {"2. Technology is best described as: \na The application of scientific knowledge for practical purposes \nb) A branch of biology \nc) A political ideology", 'a'},
+
 {"3. Which ancient civilization is credited with early contributions to astronomy and mathematics? \na) Mesopotamians \nb) Romans \nc) Aztecs", 'a'},
+
 {"4. The printing press was invented by: \na) Isaac Newton \nb) Johannes Gutenberg \nc) Galileo Galilei", 'b'},
+
 {"5. Who proposed the heliocentric model of the solar system? \na) Aristotle \nb) Nicolaus Copernicus \nc) Ptolemy", 'b'},
+
 {"6. Which of these is a direct result of the Industrial Revolution? \na) The invention of the telescope \nb) The rise of factories \nc) The fall of the Roman Empire", 'b'},
+
 {"7. What is the main concern of bioethics? \na) Astronomy and cosmology \na) Moral implications of biological and medical research \nc) Political science", 'b'},
+
 {"8. Which modern technology has had the biggest impact on communication? \na) Steam engine \nb) Internet \nc) Microscope", 'b'},
+
 {"9. CRISPR is a technology used for: \na) Space exploration \nb) Gene editing \nc) Coal mining", 'b'},
+
 {"10. Which is a positive effect of technology in education? \na) Improved access to information \nb) Less physical activity \nc) Decreased motivation", 'a'},
+
 {"11. Which philosopher is known for linking science with society through the scientific method? \na) Francis Bacon \nb) Socrates \nc) Karl Marx", 'a'},
+
 {"12. Which form of energy is renewable? \na) Coal \nb) Natural gas \nc) Solar", 'c'},
+
 {"13. What is the digital divide? \na) A crack in software \nb) The gap between those who have access to technology and those who do not \nc) The difference between Mac and PC", 'b'},
+
 {"14. Which technology is used to monitor and collect data on climate change? \na) Typewriter \nb) Satellite imaging \nc) Light bulbs", 'b'},
+
 {"15. Artificial Intelligence (AI) is primarily used in: \na) Woodworking \nb) Data processing and automation \nc) Pottery", 'b'},
+
 {"16. The Green Revolution is associated with: \na) Solar panels \nb) Agricultural advancements \nc) Political revolts", 'b'},
+
 {"17. Which organization is responsible for space exploration in the U.S.? \na) WHO \nb) NASA \nc) WTO", 'b'},
+
 {"18. Which of these is a major ethical concern in modern tech? \na) Data privacy \nb) Color of smartphones \nc) Internet speed", 'a'},
+
 {"19. Scientific knowledge is often considered provisional because: \na) It changes with new evidence \nb) It's made up \nc) It’s permanent", 'c'},
+
 {"20. Social media impacts society by: \na) Only spreading false news \nb) Only entertaining people \nc) Influencing communication, politics, and culture", 'c'},
+
 {"21. Which ancient technology greatly impacted transportation? \na) Telescope \nb) Electricity \nc) The wheel", 'c'},
+
 {"22. Which of the following best describes the main goal of Science, Technology, and Society (STS) studies? \na) To improve scientific theories \nb) To explore the interaction between science, technology, and human values \nc) To increase the speed of technological innovation", 'b'},
+
 {"23. What role does technology play in society according to STS perspectives? \na) It only solves human problems \nb) It passively reflects the progress of science \nc) It shapes and is shaped by social, cultural, and political factors", 'c'},
+
 {"24. Which invention had the most significant impact on global communication in the 20th century? \na) Steam engine \nb) Internet \nc) Telescope", 'b'},
+
 {"25. 4. What is one ethical issue commonly discussed in STS when it comes to biotechnology? \na) High costs of production \nb) Speed of scientific development \nc) Genetic modification and its impact on future generations", 'c'}
+
         }},
+
         {"Art_Appreciation", {
+
             {"1.Which artistic movement emphasized intense emotion and subjective experience? \na)  Realism  \nb)  Classicism  \nc)  Romanticism", 'c'},
+
 {"2.What is the term for the arrangement of elements in a work of art? \na)  Color Palette \nb)  Composition  \nc)  Perspective", 'b'},
+
 {"3.What is the overall feeling or mood of a work of art often described as? \na) Subject \nb) Form \nc) Atmosphere     ", 'c'},
+
 {"4.What is the term for the repetition of visual elements in a work of art? \na)  Rhythm \nb)  Harmony  \nc)  Contrast  " , 'a'},
+
 {"5.What is the term for the relative lightness or darkness of a color?  \na)  Hue \nb)  Saturation  \nc)  Value  ", 'c'},
+
 {"6.What is the term for the area of the stage closest to the audience? \na) Upstage  \nb) Downstage \nc) Stage Left", 'b'},
+
 {"7.What is the term for the person who writes the play? \na) Director  nb) Producer  \nc) Playwright ", 'c'},
+
 {"8.What is a rehearsal? \na) The opening night of a play \nb) A practice session for actors and crew \nc) The final performance ", 'c'},
+
 {"9.What is the term for a play's overall message or meaning? \na) Plot  \nb) Theme  \nc) Setting", 'b'},
+
 {"10.What is the term for the highest point of tension or drama in a play? \na) Exposition  \nb) Rising Action \nc) Climax ", 'c'},
+
 {"11.What type of theater often incorporates music, singing, and dancing? \na) Drama  \nb) Comedy \nc) Musical  ", 'c'},
+
 {"12.Who is responsible for the overall artistic vision of a theatrical production? \na) Stage Manager \nb) Producer \nc) Directo", 'c'},
+
 {"13.What is the name for a long speech delivered by a single character on stage? \na) Aside \nb) Soliloquy \nc) Monologue", 'c'},
+
 {"14.What is the term for the person who oversees all technical aspects of a production? \na) Producer \nb) Director \nc) Stage Manager", 'c'},
+
 {"15.What is the term for a play's central conflict or problem? \na) Theme \nb) Plot \nc) Setting ", 'b'},
+
 {"16.What is the term for the objects used on stage during a performance? \na)Costumes \nb) Set \nc) Props ", 'c'},
+
 {"17.What is the term for the clothing worn by actors during a performance? \na) Props \nb) Set            \nc) Costumes", 'c'},
+
 {"18.What is the term for the main character in a play? \na) Antagonist \nb) Protagonist \nc) Foil ", 'b'},
+
 {"19.The Mona Lisa was painted by \na. Michelangelo \nb. Raphael \nc.Leonardo da Vinci", 'c'},
+
 {"20.Which of the following is a famous Renaissance artist? \na.) Vincent van Gogh \nb.)Pablo Picasso \nc).Leonardo da Vinci ", 'c'},
+
 {"21.What is the term for a play's setting in time and place? \na) Plot \nb) Theme \nc) Setting", 'c'},
+
 {"22.What is the term for the written description of a play's setting and characters? \na) Playbill \nb) Stage Directions \nc) Script  ", 'b'},
+
 {"23.The Last Supper by Leonardo da Vinci is an example of which art period? \na)Renaissance \nb)Baroque \nc)Rococo", 'a'},
+
 {"24.Which of the following is a famous French artist? \na) Vincent van Gogh \nb) Pablo Picasso \nc) Claude Monet ", 'c'},
+
 {"25.The Scream by Edvard Munch is an example of which art movement? \na)Expressionism \nb) Cubism \nc)Surrealism ", 'a'}
+
         }},
+
         {"Computer_Programming",{
+
         {"1. Which of the following is a programming language? \na)  HTML \nb)  CSS \nc)  Phyton ", 'c'},
+
 {"2. What does HTML stand for? \na)  Hyper Text Markup Language \nb)  Hyperlinks and Text Markup Language \nc)  HighText Markup Language ", 'a'},
+
 {"3. Which of the following is NOT a valid variable name in Python? \na) _var \nb) var1 \nc) 1var ", 'c'},
+
 {"4. Which of the following operators is used for exponentiation in Python? \na) ^ \nb) ** \nc) // ?", 'b'},
+
 {"5. IWhat is the purpose of the 'break' statement in a loop?  \na)  It terminates the loop immediately \nb) It skips the current iteration and moves to the next one. \nc) It restarts the loop from the beginning.", 'c'},
+
 {"6. Which of the following is the correct way to declare a variable in Java? \na) int var = 5; \nb)  var = 5; \nc) 5 = var;", 'a'},
+
 {"7. What is the correct way to create an object in Java? \na) Object obj = new Object(); \nb) Object obj(); \nc)  new Object obj; ", 'a'},
+
 {"8. Which of the following is used for exception handling in Java? \na) try-catch \nb)  if-else \nc) begin-except ", 'c'},
+
 {"9. What does the 'this' keyword refer to in Java? \na) The current class \nb)  The current object \nc) The parent class ", 'b'},
+
 {"10. Which of the following is NOT a valid loop in C++? \na) for \nb)  loop-for \nc) while ", 'b'},
+
 {"11. Which operator is used to access a class member in C++? \na) :: \nb) . \nc) // ", 'b'},
+
 {"12. Which of the following is true about pointers in C? \na)  Pointers store the memory address of variables. \nb) Pointers cannot be dereferenced. \nc) Pointers store actual values. ", 'a'},
+
 {"13. Which of the following is the correct way to declare an array in C++? \na) int arr[10]; \nb) array arr(10); \nc) int arr{10}; ", 'a'},
+
 {"14. What is the keyword used to declare a constant in C? \na) const \nb) final \nc) static ", 'a'},
+
 {"15. What does the 'continue' statement do in a loop? \na) Skips the current iteration and continues with the next iteration. \nb) Exits the loop. \nc) Starts the loop again. ", 'c'},
+
 {"16.Which of the following is NOT a valid variable name in Java? \na) _var \nb) var1 \nc) 1var ", 'c'},
+
 {"17. Which header file is needed for printf() function? \na) stdio.h \nb) stdlib.h \nc)  conio.h ", 'a'},
+
 {"18 Which of the following is not a loop structure in C? \na) for \nb)  do-while \nc) repeat-until ", 'c'},
+
 {"19.Which one is used to read a single character in C? \na) scanf() \nb)  getchar() \nc)  getch() ", 'b'},
+
 {"20. Which file extension is used for C++ source code? \na) .cp  \nb) .c++ \nc)  .cpp	 ", 'c'},
+
 {"21.Which is used to terminate a switch case in C? \na) stop \nb) exit \nc) break ", 'c'},
+
 {"22.Which of these is not a data type in C? \na) float \nb) real \nc) int ", 'c'},
+
 {"23.What is the correct way to declare a pointer? \na) int ptr; \nb) int ptr; \nc) ptr int*; ", 'a'},
+
 {"24.Which keyword is used to create a class in C++? \na) struct \nb) object \nc) class ", 'c'},
+
 {"25.Which operator is used for concatenation in Java? \na) + \nb) * \nc) & ", 'a'}
 
+
+
         }
+
+
 
         }
     };
+
+
 
 public:
     User getCurrentUser () const {
         return currentUser ;
     }
 
-    void printSeparator() {
-        cout << "============================" << endl;
+    void simpleLoading() {
+        cout << "" << endl;
     }
 
     void clearScreen() {
@@ -201,27 +535,258 @@ public:
     void registerUser () {
         User newUser ;
         clearScreen();
-        cout << "===========================\n";
-        cout << "         REGISTER\n";
-        cout << "===========================\n";
-        cout << "Enter username: ";
+        cout << "\t\t\t\033[30;107m||============================================================||" << endl;
+        cout << "\t\t\t\033[30;107m||                   REGISTERING ACCOUNTS                     ||" << endl;
+        cout << "\t\t\t\033[30;107m||------------------------------------------------------------||" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||" << endl;
+        cout << "\t\t\t\033[30;107m||   Username:    ""                                            ||" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||" << endl;
+        cout << "\t\t\t\033[30;107m||   Password:    ""                                            ||" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||" << endl;
+        cout << "\t\t\t\033[30;107m||   Fullname:    ""                                            ||" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||" << endl;
+        cout << "\t\t\t\033[30;107m||   Program:     ""                                            ||" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||" << endl;
+        cout << "\t\t\t\033[30;107m||   Section:     ""                                            ||" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||" << endl;
+        cout << "\t\t\t\033[30;107m||   Gender:      ""                                            ||" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||" << endl;
+        cout << "\t\t\t\033[30;107m||   Birthday:    ""                                            ||" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||" << endl;
+        cout << "\t\t\t\033[30;107m||   YearLevel:   ""                                            ||" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||" << endl;
+        cout << "\t\t\t\033[30;107m||============================================================||\033[0m" << endl;
+        cout << "\t\t\tEnter username: ";
         cin >> newUser .username;
-        cout << "Enter password: ";
+        if(newUser .username == "register" || newUser .username == "admin" || newUser .username == "REGISTER" ){
+            clearScreen();
+            cout << "\n\n\n\n\n\n\n\t\t\t\033[30;101m||==========================================================================||" << endl;
+            cout << "\t\t\t||\033[107m                                                                          \033[101m||" <<endl;
+            cout << "\t\t\t||\033[107m                             INVALID USERNAME!                            \033[101m||"<<endl;
+            cout << "\t\t\t||\033[107m                                                                          \033[101m||" <<endl;
+            cout << "\t\t\t||==========================================================================||\033[0m" << endl;
+            registerUser();
+        }
+        clearScreen();
+        cout << "\t\t\t\033[30;107m||============================================================||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                   REGISTERING ACCOUNTS                     ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||------------------------------------------------------------||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Username:    "<<setw(44) <<left <<newUser .username <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Password:    ""                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Fullname:    ""                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Program:     ""                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Section:     ""                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Gender:      ""                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Birthday:    ""                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   YearLevel:   ""                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||============================================================||\033[0m" << endl;
+        cout << "\t\t\tEnter password: ";
         cin >> newUser .password;
+        if(newUser .username == "register" || newUser .username == "admin" || newUser .username == "REGISTER" ){
+            clearScreen();
+            cout << "\n\n\n\n\n\n\n\t\t\t\033[30;101m||==========================================================================||" << endl;
+            cout << "\t\t\t||\033[107m                                                                          \033[101m||" <<endl;
+            cout << "\t\t\t||\033[107m                             INVALID USERNAME!                            \033[101m||"<<endl;
+            cout << "\t\t\t||\033[107m                                                                          \033[101m||" <<endl;
+            cout << "\t\t\t||==========================================================================||\033[0m" << endl;
+            registerUser();
+        }
+        clearScreen();
+        cout << "\t\t\t\033[30;107m||============================================================||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                   REGISTERING ACCOUNTS                     ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||------------------------------------------------------------||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Username:    "<<setw(44) <<left <<newUser .username <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Password:    "<<setw(44) <<left <<newUser .password <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Fullname:    ""                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Program:     ""                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Section:     ""                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Gender:      ""                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Birthday:    ""                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   YearLevel:   ""                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||============================================================||\033[0m" << endl;
         cin.ignore();
-        cout << "Enter Full Name (First Middle Last): ";
+        cout << "\t\t\tEnter Full Name (First Middle Last): ";
         getline(cin, newUser .fullName);
-        cout << "Enter Program: ";
+        clearScreen();
+        cout << "\t\t\t\033[30;107m||============================================================||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                   REGISTERING ACCOUNTS                     ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||------------------------------------------------------------||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Username:    "<<setw(44) <<left <<newUser .username <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Password:    "<<setw(44) <<left <<newUser .password <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Fullname:    "<<setw(44) <<left <<newUser .fullName <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Program:     ""                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Section:     ""                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Gender:      ""                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Birthday:    ""                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   YearLevel:   ""                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||============================================================||\033[0m" << endl;
+        cout << "\t\t\tEnter Program: ";
         getline(cin, newUser .program);
-        cout << "Enter Section: ";
+        clearScreen();
+        cout << "\t\t\t\033[30;107m||============================================================||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                   REGISTERING ACCOUNTS                     ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||------------------------------------------------------------||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Username:    "<<setw(44) <<left <<newUser .username <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Password:    "<<setw(44) <<left <<newUser .password <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Fullname:    "<<setw(44) <<left <<newUser .fullName <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Program:     "<<setw(44) <<left <<newUser .program <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Section:     ""                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Gender:      ""                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Birthday:    ""                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   YearLevel:   ""                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||============================================================||\033[0m" << endl;
+        cout << "\t\t\tEnter Section: ";
         getline(cin, newUser .section);
-        cout << "Enter Gender (Male/Female): ";
+        clearScreen();
+        cout << "\t\t\t\033[30;107m||============================================================||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                   REGISTERING ACCOUNTS                     ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||------------------------------------------------------------||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Username:    "<<setw(44) <<left <<newUser .username <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Password:    "<<setw(44) <<left <<newUser .password <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Fullname:    "<<setw(44) <<left <<newUser .fullName <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Program:     "<<setw(44) <<left <<newUser .program <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Section:     "<<setw(44) <<left <<newUser .section <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Gender:      ""                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Birthday:    ""                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   YearLevel:   ""                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||============================================================||\033[0m" << endl;
+        cout << "\t\t\tEnter Gender (Male/Female): ";
         getline(cin, newUser .gender);
-        cout << "WRITE YOUR BIRTHDAY LIKE THIS -> 2009-11-20" << endl;
-        cout << "Enter Birthday (YYYY-MM-DD): ";
+        clearScreen();
+        cout << "\t\t\t\033[30;107m||============================================================||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                   REGISTERING ACCOUNTS                     ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||------------------------------------------------------------||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Username:    "<<setw(44) <<left <<newUser .username <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Password:    "<<setw(44) <<left <<newUser .password <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Fullname:    "<<setw(44) <<left <<newUser .fullName <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Program:     "<<setw(44) <<left <<newUser .program <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Section:     "<<setw(44) <<left <<newUser .section <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Gender:      "<<setw(44) <<left <<newUser .gender <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Birthday:    ""                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   YearLevel:   ""                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||============================================================||\033[0m" << endl;
+        cout << "\t\t\tWRITE YOUR BIRTHDAY LIKE THIS -> 2009-11-20" << endl;
+        cout << "\t\t\tEnter Birthday (YYYY-MM-DD): ";
         getline(cin, newUser .birthday);
-        cout << "Enter Year Level(1,2,3,4): ";
+        clearScreen();
+        cout << "\t\t\t\033[30;107m||============================================================||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                   REGISTERING ACCOUNTS                     ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||------------------------------------------------------------||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Username:    "<<setw(44) <<left <<newUser .username <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Password:    "<<setw(44) <<left <<newUser .password <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Fullname:    "<<setw(44) <<left <<newUser .fullName <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Program:     "<<setw(44) <<left <<newUser .program <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Section:     "<<setw(44) <<left <<newUser .section <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Gender:      "<<setw(44) <<left <<newUser .gender <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Birthday:    "<<setw(44) <<left <<newUser .birthday <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   YearLevel:   ""                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||============================================================||\033[0m" << endl;
+        cout << "\t\t\tEnter Year Level(1,2,3,4): ";
         cin >> newUser .yearLevel;
+        clearScreen();
+        cout << "\t\t\t\033[30;107m||============================================================||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                   REGISTERING ACCOUNTS                     ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||------------------------------------------------------------||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Username:    "<<setw(44) <<left <<newUser .username <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Password:    "<<setw(44) <<left <<newUser .password <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Fullname:    "<<setw(44) <<left <<newUser .fullName <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Program:     "<<setw(44) <<left <<newUser .program <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Section:     "<<setw(44) <<left <<newUser .section <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Gender:      "<<setw(44) <<left <<newUser .gender <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   Birthday:    "<<setw(44) <<left <<newUser .birthday <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||   YearLevel:   "<<setw(44) <<left <<newUser .yearLevel <<"||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||                                                            ||\033[0m" << endl;
+        cout << "\t\t\t\033[30;107m||============================================================||\033[0m" << endl;
+        Sleep(1200);
 
         ofstream outFile("accounts.txt", ios::app);
         if (outFile.is_open()) {
@@ -234,8 +799,14 @@ public:
                     << newUser .birthday << ","
                     << newUser .yearLevel << endl;
             outFile.close();
-            cout << "Registration successful!\n";
-            Sleep(300);
+            clearScreen();
+            cout << "\n\n\n\n\n\n\n\t\t\t\033[30;101m||==========================================================================||" << endl;
+            cout << "\t\t\t||\033[107m                                                                          \033[101m||" <<endl;
+            cout << "\t\t\t||\033[107m                          REGISTRATION COMPLETE!.                         \033[101m||"<<endl;
+            cout << "\t\t\t||\033[107m                                                                          \033[101m||" <<endl;
+            cout << "\t\t\t||==========================================================================||\033[0m" << endl;
+            system("pause");
+            return;
         } else {
             cout << "Error: Unable to open file!\n";
         }
@@ -248,8 +819,11 @@ public:
         cout << "Error: Unable to open accounts file!\n";
         return;
     }
-    int studentnumber = 1;
+
     string line;
+    int studentnumber = 1;
+    string subjects[] = {"Applied_Ethics", "Purposive_Communication", "NSTP_2", "Discrete_Mathematics", "PATHFIT_2", "FILDIS", "STS", "Art_Appreciation", "Computer_Programming"};
+
     while (getline(inFile, line)) {
         size_t pos = 0;
         string data[8];
@@ -262,88 +836,171 @@ public:
         }
         data[i] = line;
 
-
         cout << "\t\t\033[38;5;235m\033[48;5;235m||=============================================================================||\033[0m" << endl;
-        cout << "\t\t\033[38;5;235m\033[48;5;235m||                  \033[97mSTUDENT: " << setw(7) <<right<<setfill('0') << studentnumber << "   Account Information                     \033[38;5;235m||\033[0m" << endl;
+        cout << "\t\t\033[38;5;235m\033[48;5;235m||                  \033[97mSTUDENT: " << setw(7) << right << setfill('0') << studentnumber << "   Account Information                     \033[38;5;235m  \033[0m" << endl;
         cout << "\t\t\033[38;5;235m\033[48;5;235m||                                                                             ||\033[0m" << endl;
-        cout << "\t\t\033[38;5;235m\033[48;5;235m|| \033[48;5;234m                                    \033[48;5;235m    \033[48;5;234m                                   \033[48;5;235m ||\033[0m" << endl;
-        cout << "\t\t\033[38;5;235m\033[48;5;235m|| \033[48;5;234m  \033[90mName:     \033[97m" << setw(21) <<setfill(' ')<< left << data[2] << "\033[38;5;235m   \033[48;5;235m"<<setw(4)<<" "<<"\033[48;5;234m         "/*insert the progress here*/"                          \033[48;5;235m ||\033[0m" << endl;
-        cout << "\t\t\033[38;5;235m\033[48;5;235m|| \033[48;5;234m  \033[90mUsername: \033[97m" << setw(21) << left << data[0] << "\033[38;5;235m   \033[48;5;235m"<<setw(4)<<" "<<"\033[48;5;234m                                   \033[48;5;235m ||\033[0m" << endl;
-        cout << "\t\t\033[38;5;235m\033[48;5;235m|| \033[48;5;234m  \033[90mGender:   \033[97m" << setw(21) << left << data[5] << "\033[38;5;235m   \033[48;5;235m"<<setw(4)<<" "<<"\033[48;5;234m                                   \033[48;5;235m ||\033[0m" << endl;
-        cout << "\t\t\033[38;5;235m\033[48;5;235m|| \033[48;5;234m  \033[90mProgram & Section: \033[97m" << setw(15) << left << data[3] + " - " + data[4] << "\033[38;5;235m\033[48;5;235m"<<setw(4)<<" "<<"\033[48;5;234m                                   \033[48;5;235m ||\033[0m" << endl;
-        cout << "\t\t\033[38;5;235m\033[48;5;235m|| \033[48;5;234m  \033[90mYear Level: \033[97m" << setw(22) << left << data[6] << "\033[38;5;235m\033[48;5;235m"<<setw(4)<<" "<<"\033[48;5;234m                                   \033[48;5;235m ||\033[0m" << endl;
-        cout << "\t\t\033[38;5;235m\033[48;5;235m|| \033[48;5;234m                                    \033[48;5;235m    \033[48;5;234m                                   \033[48;5;235m ||\033[0m" << endl;
-        cout << "\t\t\033[38;5;235m\033[48;5;235m|| \033[48;5;234m                                    \033[48;5;235m    \033[48;5;234m                                   \033[48;5;235m ||\033[0m" << endl;
-        cout << "\t\t\033[38;5;235m\033[48;5;235m|| \033[48;5;234m                                    \033[48;5;235m    \033[48;5;234m                                   \033[48;5;235m ||\033[0m" << endl;
-        cout << "\t\t\033[38;5;235m\033[48;5;235m||                                                                             ||\033[0m" << endl;
-        cout << "\t\t\033[38;5;235m\033[48;5;235m||                                                                             ||\033[0m" << endl;
-        cout << "\t\t\033[38;5;235m\033[48;5;235m||                                                                             ||\033[0m" << endl;
-        cout << "\t\t\033[38;5;235m\033[48;5;235m||                                                                             ||\033[0m" << endl;
+        cout << "\t\t\033[38;5;235m\033[48;5;235m|| \033[48;5;234m                                                                     \033[48;5;235m       ||\033[0m" << endl;
+        cout << "\t\t\033[38;5;235m\033[48;5;235m|| \033[48;5;234m  \033[90mName:     \033[97m" << setw(57) << setfill(' ') << left << data[2] << "\033[48;5;235m         \033[0m" << endl;
+        cout << "\t\t\033[38;5;235m\033[48;5;235m|| \033[48;5;234m  \033[90mUsername: \033[97m" << setw(57) << left << data[0] << "\033[48;5;235m         \033[0m" << endl;
+        cout << "\t\t\033[38;5;235m\033[48;5;235m|| \033[48;5;234m  \033[90mGender:   \033[97m" << setw(57) << left << data[5] << "\033[48;5;235m         \033[0m" << endl;
+        cout << "\t\t\033[38;5;235m\033[48;5;235m|| \033[48;5;234m  \033[90mProgram & Section: \033[97m" << setw(48) << left << data[3] + " - " + data[4] << "\033[48;5;235m         \033[0m" << endl;
+        cout << "\t\t\033[38;5;235m\033[48;5;235m|| \033[48;5;234m  \033[90mYear Level: \033[97m" << setw(55) << left << data[6] << "\033[48;5;235m         \033[0m" << endl;
         cout << "\t\t\033[38;5;235m\033[48;5;235m||=============================================================================||\033[0m" << endl;
 
-        string progressFileName = data[0] + "_progress.txt";
-        ifstream progressFile(progressFileName );
-        cout << "Progress \n";
+        int totalPossibleScore = 0;
+        int totalScore = 0;
+        string totalScoreString = "N/A";
+        string overallScoreString = "N/A";
+        string overallStatusString = "N/A";
 
-        if (!progressFile.is_open()) {
-            cout << "No progress found for " << data[0] << "\n";
-        } else {
-            string progressLine;
-            while (getline(progressFile, progressLine)) {
-                if (progressLine.find("-1") != string::npos) {
-                    size_t pos = 0;
-                    while ((pos = progressLine.find("-1")) != string::npos) {
-                        progressLine.replace(pos, 2, "\033[31mNot Answered\033[38;5;214m");
-                    }
-                }
-                cout << progressLine << "\n";
+        for (const string& subject : subjects) {
+            string progressFileName = data[0] + "_" + subject + "_progress.txt";
+            ifstream progressFile(progressFileName);
+            int score = -1;
+
+            if (progressFile.is_open()) {
+                progressFile >> score;
+                progressFile.close();
             }
-            progressFile.close();
+
+            totalPossibleScore += 25;
+            totalScore += score;
+
+            string scoreString;
+            int scoreint;
+            string status;
+            string color;
+            if (score == -1) {
+                scoreString = "N/A";
+                status = "N/A";
+                color = "\033[97m";
+            } else if (score >= 13) {
+                scoreint = score;
+                status = "PASSED";
+                color = "\033[32m";
+            } else {
+                scoreint = score;
+                status = "FAILED";
+                color = "\033[31m";
+            }
+        if (score == -1){
+            cout << "\t\t\033[38;5;235m\033[48;5;235m|| \033[48;5;234m  \033[90m"<<setw(25) <<left << subject << ": \033[97m"
+                <<setw(5)<< left << scoreString << "   " << color<<setw(32)<<left << status  <<"\033[0m\033[48;5;235m         \033[0m" << endl;
+
+                }else if (score >= 1 || score <= 25){
+            cout << "\t\t\033[38;5;235m\033[48;5;235m|| \033[48;5;234m  \033[90m"<<setw(25) <<left << subject << ": \033[97m"
+                <<setw(5)<< left << scoreint << "   " << color <<setw(32) <<left<< status << "\033[0m\033[48;5;235m         \033[0m" << endl;
+                }
         }
+        double overallScore = (totalPossibleScore > 0) ? (50 + (static_cast<double>(totalScore) / totalPossibleScore) * 50) : 0;
+        string overallStatus = overallScore >= 75 ? "PASSED" : "FAILED";
+        string overallColor = overallScore >= 75 ? "\033[32m" : "\033[31m";
 
-        cout << "\n";
-        studentnumber += 1; // Correctly increment the student number
-        cout << "-----------------\n";
+        if(totalScore <= -1){
+        cout << "\t\t\033[38;5;235m\033[48;5;235m|| \033[48;5;234m                                                                     \033[48;5;235m       ||\033[0m" << endl;
+        cout << "\t\t\033[38;5;235m\033[48;5;235m|| \033[48;5;234m  \033[90mOverall Score: \033[97m"
+              << totalScoreString << " ("
+             << fixed << setprecision(2) << overallScoreString << "%)  "
+             << overallStatusString << "                                     \033[0m\033[48;5;235m         \033[0m" << endl;
+        cout << "\t\t\033[38;5;235m\033[48;5;235m||=============================================================================||\033[0m" << endl;
+        studentnumber++;
+        }else if (totalScore > 0){
+        cout << "\t\t\033[38;5;235m\033[48;5;235m|| \033[48;5;234m                                                                     \033[48;5;235m       ||\033[0m" << endl;
+        cout << "\t\t\033[38;5;235m\033[48;5;235m|| \033[48;5;234m  "<<setw(10)<< left <<"\033[90mOverall Score: \033[97m"
+             << overallColor <<setw(3) <<left << totalScore << "/"<<setw(4)<<left << totalPossibleScore << " ("
+             << fixed << setprecision(2) << overallScore << "%)  "
+             << overallStatus << "                           \033[0m\033[48;5;235m         \033[0m" << endl;
+        cout << "\t\t\033[38;5;235m\033[48;5;235m||=============================================================================||\033[0m" << endl;
+        }
+        cout <<"\n"<<endl;
     }
-
     inFile.close();
     system("pause");
 }
 
 
-    void Developers(){
-    clearScreen();
-    cout << "||======================================================================||" << endl;
-    cout << "||                                                                      ||" << endl;
-    cout << "||                                                                      ||" << endl;
-    cout << "||                                                                      ||" << endl;
-    cout << "||                                                                      ||" << endl;
-    cout << "||                                                                      ||" << endl;
-    cout << "||                                                                      ||" << endl;
-    cout << "||                                                                      ||" << endl;
-    cout << "||                                                                      ||" << endl;
-    cout << "||                                                                      ||" << endl;
-    cout << "||                                                                      ||" << endl;
-    cout << "||                                                                      ||" << endl;
-    cout << "||                                                                      ||" << endl;
-    cout << "||                                                                      ||" << endl;
-    cout << "||                                                                      ||" << endl;
-    cout << "||                                                                      ||" << endl;
-    cout << "||                                                                      ||" << endl;
-    cout << "||                                                                      ||" << endl;
-    cout << "||======================================================================||" << endl;
-    system("pause");
-    }
     bool loginUser () {
         string username, password, line;
         clearScreen();
-        cout << "\t\t\t===================" << endl;
-        cout << "\t\t\t       LOGIN       " << endl;
-        cout << "\t\t\t===================" << endl;
+        cout << "\t\t\t\033[30;101m|=====================================================||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                      CHANGE PASSWORD               \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m ---------------------------------------------------\033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                    \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                    \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m             \033[47m                                 \033[30;107m      \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m    Username:\033[47m    ""                             \033[30;107m      \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m             \033[47m                                 \033[30;107m      \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                    \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                    \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m             \033[47m                                 \033[30;107m      \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m    Password:\033[47m    ""                             \033[30;107m      \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m             \033[47m                                 \033[30;107m      \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                    \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                    \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                    \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m    Want to register? Type \"register\"               \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                    \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                    \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                    \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||====================================================||\033[0m" << endl;
+
         cout << "\t\t\tEnter username: ";
         cin >> username;
+
+        if(username == "register" || username == "Register" || username == "REGISTER"){
+            registerUser();
+        }
+        clearScreen();
+        cout << "\t\t\t\033[30;101m|=====================================================||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                      CHANGE PASSWORD               \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m ---------------------------------------------------\033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                    \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                    \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m             \033[47m                                 \033[30;107m      \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m    Username:\033[47m    "<<setw(29)<<left<<username<<"\033[30;107m      \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m             \033[47m                                 \033[30;107m      \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                    \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                    \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m             \033[47m                                 \033[30;107m      \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m    Password:\033[47m    ""                             \033[30;107m      \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m             \033[47m                                 \033[30;107m      \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                    \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                    \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                    \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m    Want to register? Type \"register\"               \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                    \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                    \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                    \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||====================================================||\033[0m" << endl;
         cout << "\t\t\tEnter password: ";
         cin >> password;
+        clearScreen();
+        cout << "\t\t\t\033[30;101m|=====================================================||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                      CHANGE PASSWORD               \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m ---------------------------------------------------\033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                    \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                    \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m             \033[47m                                 \033[30;107m      \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m    Username:\033[47m    "<<setw(29)<<left<<username<<"\033[30;107m      \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m             \033[47m                                 \033[30;107m      \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                    \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                    \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m             \033[47m                                 \033[30;107m      \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m    Password:\033[47m    "<<setw(29)<<left<<password<<"\033[30;107m      \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m             \033[47m                                 \033[30;107m      \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                    \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                    \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                    \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m    Want to register? Type \"register\"               \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                    \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                    \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                    \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||====================================================||\033[0m" << endl;
+        if(password == "register" || password == "Register" || password == "REGISTER"){
+            registerUser();
+        }
+        Sleep(1000);
+
 
         if (username == "admin" && password == "adminpass") {
             currentUser .username = username;
@@ -389,6 +1046,9 @@ public:
         inFile.close();
         return false;
     }
+
+
+
 
     void loadProgress() {
     quizScores.clear();
@@ -479,17 +1139,17 @@ void saveAnswersToFile() {
         string status;
         int score = quizScores.count(subject) ? quizScores[subject] : -1;
 
-        // Check if the subject exists in quizQuestions
+        double percentage = 50;
         if (quizQuestions.find(subject) != quizQuestions.end()) {
-            int possibleScore = quizQuestions[subject].size(); // Get the number of questions for the subject
-            double percentage = (possibleScore > 0) ? (static_cast<double>(score) / possibleScore) * 100 : 0;
+            int possibleScore = quizQuestions[subject].size();
+            percentage = (possibleScore > 0) ? 50 + (static_cast<double>(score) / possibleScore) * 50 : 0;
 
             if (score == -1) {
                 status = "NOT TAKEN";
             } else if (score == 0) {
-                status = "FAILED";
+                status = "\033[30;41mFAILED";
             } else {
-                status = (percentage >= 75) ? "PASSED" : "FAILED";
+                status = (percentage >= 75) ? "\033[30;42m PASSED  \033[107m" : "\033[30;41m FAILED  \033[107m";
                 totalScore += score;
                 totalPossible += possibleScore;
             }
@@ -510,17 +1170,26 @@ void saveAnswersToFile() {
         }
     }
 
-    double overallPercentage = (totalPossible > 0) ? (static_cast<double>(totalScore) / totalPossible) * 100 : 0;
-    string overallStatus = (overallPercentage >= 75) ? "PASSED" : "FAILED";
+    double overallPercentage = (totalPossible > 0) ? 50 + (static_cast<double>(totalScore) / totalPossible) * 50 : 0;
+    string overallStatus = (overallPercentage >= 75) ? "\033[30;42m PASSED \033[107m" : "\033[30;41m FAILED \033[107m";
     cout << "\t\t||\033[107mTotal Score: " << totalScore << "/" << totalPossible
          << " | Overall Percentage: " << fixed << setprecision(2) << overallPercentage << "%";
     if (totalPossible > 0) {
-        cout << " | " << setw(18) << overallStatus << "\033[101m||" << endl;
+        cout << " | " << setw(18) <<right<< overallStatus << "            \033[101m||" << endl;
     } else {
-        cout << " | " << setw(18) << "N/A" << "\033[101m||" << endl;
+        cout << " | " << setw(18) << "N/A" << "     \033[101m||" << endl;
     }
     cout << "\t\t||======================================================================||" << endl;
-    cout << "\t\t\033[0m"; // Reset color
+    cout << "\t\t\033[0m";
+    int review;
+    cout << "Choose what Subject you want to Review. :: ";
+    cin >> review;
+    if (review == 10){
+    return;
+    }
+    if(review >= 1 || review <= 9){
+        reviewQuiz(subjects[review - 1]);
+    }
 
     system("pause");
 }
@@ -531,13 +1200,14 @@ void saveAnswersToFile() {
 
 
 
-
-
-
-
     void reviewQuiz(const string& subject) {
         if (quizQuestions.find(subject) == quizQuestions.end()) {
-            cout << "Invalid subject!\n";
+                clearScreen();
+            cout << "\n\n\n\n\n\n\n\t\t\t\033[30;101m||==========================================================================||\033[0m" << endl;
+            cout << "\t\t\t\033[30;101m||\033[107m                                                                          \033[101m||\033[0m" <<endl;
+            cout << "\t\t\t\033[30;101m||\033[107m                            INVALID SUBJECT                               \033[101m||\033[0m"<<endl;
+            cout << "\t\t\t\033[30;101m||\033[107m                                                                          \033[101m||\033[0m" <<endl;
+            cout << "\t\t\t\033[30;101m||==========================================================================||\033[0m" << endl;
             return;
         }
 
@@ -572,39 +1242,208 @@ void saveAnswersToFile() {
         system("pause");
     }
 
-     void takeQuiz(string subject) {
-        if (quizQuestions.find(subject) == quizQuestions.end()) {
-            cout << "Invalid subject!\n";
-            return;
-        }
 
-        clearScreen();
-        cout << "\nTaking " << subject << " Quiz...\n";
 
-        int score = 0;
-        char answer;
 
-        for (size_t i = 0; i < quizQuestions[subject].size(); i++) {
-            cout << quizQuestions[subject][i].first << "\n";
-            cout << "Your answer: ";
-            cin >> answer;
 
-            // Store user answer
-            userAnswers[subject].resize(quizQuestions[subject].size(), '\0');
-            userAnswers[subject][i] = tolower(answer);
 
-            if (tolower(answer) == quizQuestions[subject][i].second) {
-                score++;
+
+
+    void choosequiz(){
+        int i = 1;
+        string subjects[] = {"Applied_Ethics", "Purposive_Communication", "NSTP_2", "Discrete_Mathematics", "PATHFIT_2", "FILDIS", "STS", "Art_Appreciation", "Computer_Programming"};
+                            int quizNum;
+                            clearScreen();
+                            cout << "\t\t\033[30;101m                                                              "<<endl;
+                            cout << "\t\t  \033[107m                     Choose Quiz                          \033[101m  "<<endl;
+                            cout << "\t\t  \033[107m==========================================================\033[101m  "<<endl;
+                            int totalScore = 0, totalPossible = 0;
+
+    for (const string& subject : subjects) {
+        string status;
+        int score = quizScores.count(subject) ? quizScores[subject] : -1;
+
+
+        if (quizQuestions.find(subject) != quizQuestions.end()) {
+            int possibleScore = quizQuestions[subject].size();
+            double percentage = (possibleScore > 0) ? (static_cast<double>(score) / possibleScore) * 100 : 0;
+
+            if (score == -1) {
+                status = "NOT TAKEN";
+            } else if (score == 0) {
+                status = "TAKEN";
+            } else {
+                status = (percentage >= 75) ? "TAKEN" : "TAKEN";
+                totalScore += score;
+                totalPossible += possibleScore;
             }
+
+            cout << "\t\t  \033[107m" << setw(1) << left << i << ". "<< setw(43)<< subject
+                 << "| " << setw(9) << left << status << " \033[101m  " << endl;
+            cout << "\t\t  \033[107m----------------------------------------------------------\033[101m  " << endl;
+            i++;
+        } else {
+            cout << "\t\t  \033[107m" << setw(1) << left << i << ". " << setw(43) << left << subject << "| "
+    << setw(9) << left << "NOT TAKEN" << " \033[101m  " << endl;
+            cout << "\t\t  \033[107m----------------------------------------------------------\033[101m  " << endl;
+            i++;
         }
-
-        cout << "Quiz completed! Your score: " << score << "/" << quizQuestions[subject].size() << "\n";
-
-        quizScores[subject] = score;
-        saveProgress();
-        saveAnswersToFile();
-        system("pause");
     }
+    cout << "\t\t  \033[107m10.Exit                                                   \033[101m  "<<endl;
+    cout << "\t\t                                                              " << endl;
+    cout << "\t\t\033[0m";
+
+                                cin >> quizNum;
+                            if (quizNum >= 1 && quizNum <= 9) {
+                                takeQuiz(subjects[quizNum - 1]);
+                            } else if(quizNum == 10) {
+                                return;
+
+                            }
+
+
+
+    }
+
+void takeQuiz(string subject) {
+    if (quizQuestions.find(subject) == quizQuestions.end()) {
+        cout << "Invalid subject!\n";
+        system("pause");
+        return;
+    }
+
+    if (quizScores.find(subject) != quizScores.end() && quizScores[subject] != -1) {
+        if (subject == "Applied_Ethics"){
+            clearScreen();
+            cout << "\n\n\n\n\n\t\t\033[30;101m||==========================================================================||" << endl;
+            cout << "\t\t||\033[107m                                                                          \033[101m||" <<endl;
+            cout << "\t\t||\033[107m    You have already answered the Applied Ethics quiz.                    \033[101m||"<<endl;
+            cout << "\t\t||\033[107m                                                                          \033[101m||" <<endl;
+            cout << "\t\t||==========================================================================||\033[0m" << endl;
+        system("pause");
+        return;
+        }else if (subject == "Purposive_Communication"){
+            clearScreen();
+            cout << "\n\n\n\n\n\t\t\033[30;101m||==========================================================================||" << endl;
+            cout << "\t\t||\033[107m                                                                          \033[101m||" <<endl;
+            cout << "\t\t||\033[107m    You have already answered the Purposive Communication quiz.           \033[101m||"<<endl;
+            cout << "\t\t||\033[107m                                                                          \033[101m||" <<endl;
+            cout << "\t\t||==========================================================================||\033[0m" << endl;
+
+        system("pause");
+        return;
+        }else if (subject == "NSTP_2"){
+            clearScreen();
+            cout << "\n\n\n\n\n\t\t\033[30;101m||==========================================================================||" << endl;
+            cout << "\t\t||\033[107m                                                                          \033[101m||" <<endl;
+            cout << "\t\t||\033[107m    You have already answered the NSTP 2 quiz.                            \033[101m||"<<endl;
+            cout << "\t\t||\033[107m                                                                          \033[101m||" <<endl;
+            cout << "\t\t||==========================================================================||\033[0m" << endl;
+
+        system("pause");
+        return;
+
+
+        }else if (subject == "Discrete_Mathematics"){
+            clearScreen();
+            cout << "\n\n\n\n\n\t\t\033[30;101m||==========================================================================||" << endl;
+            cout << "\t\t||\033[107m                                                                          \033[101m||" <<endl;
+            cout << "\t\t||\033[107m    You have already answered the Discrete Mathematics quiz.              \033[101m||"<<endl;
+            cout << "\t\t||\033[107m                                                                          \033[101m||" <<endl;
+            cout << "\t\t||==========================================================================||\033[0m" << endl;
+
+        system("pause");
+        return;
+
+
+        }else if (subject == "PATHFIT_2"){
+            clearScreen();
+            cout << "\n\n\n\n\n\t\t\033[30;101m||==========================================================================||" << endl;
+            cout << "\t\t||\033[107m                                                                          \033[101m||" <<endl;
+            cout << "\t\t||\033[107m    You have already answered the PATHFIT 2 quiz.                         \033[101m||"<<endl;
+            cout << "\t\t||\033[107m                                                                          \033[101m||" <<endl;
+            cout << "\t\t||==========================================================================||\033[0m" << endl;
+
+        system("pause");
+        return;
+
+
+        }else if (subject == "FILDIS"){
+            clearScreen();
+            cout << "\n\n\n\n\n\t\t\033[30;101m||==========================================================================||" << endl;
+            cout << "\t\t||\033[107m                                                                          \033[101m||" <<endl;
+            cout << "\t\t||\033[107m    You have already answered the FILDIS quiz.                            \033[101m||"<<endl;
+            cout << "\t\t||\033[107m                                                                          \033[101m||" <<endl;
+            cout << "\t\t||==========================================================================||\033[0m" << endl;
+
+        system("pause");
+        return;
+
+
+        }else if (subject == "STS"){
+            clearScreen();
+            cout << "\n\n\n\n\n\t\t\033[30;101m||==========================================================================||" << endl;
+            cout << "\t\t||\033[107m                                                                          \033[101m||" <<endl;
+            cout << "\t\t||\033[107m    You have already answered the Science Technology And Society quiz.    \033[101m||"<<endl;
+            cout << "\t\t||\033[107m                                                                          \033[101m||" <<endl;
+            cout << "\t\t||==========================================================================||\033[0m" << endl;
+        system("pause");
+        return;
+
+
+        }else if (subject == "Art_Appreciation"){
+            clearScreen();
+            cout << "\n\n\n\n\n\t\t\033[30;101m||==========================================================================||" << endl;
+            cout << "\t\t||\033[107m                                                                          \033[101m||" <<endl;
+            cout << "\t\t||\033[107m    You have already answered the Art Appreciation quiz.                  \033[101m||"<<endl;
+            cout << "\t\t||\033[107m                                                                          \033[101m||" <<endl;
+            cout << "\t\t||==========================================================================||\033[0m" << endl;
+
+        system("pause");
+        return;
+        }else if (subject == "Computer_Programming"){
+            clearScreen();
+            cout << "\n\n\n\n\n\t\t\033[30;101m||==========================================================================||" << endl;
+            cout << "\t\t||\033[107m                                                                          \033[101m||" <<endl;
+            cout << "\t\t||\033[107m    You have already answered the Computer Programming quiz.              \033[101m||"<<endl;
+            cout << "\t\t||\033[107m                                                                          \033[101m||" <<endl;
+            cout << "\t\t||==========================================================================||\033[0m" << endl;
+
+        system("pause");
+        return;
+        }
+    }
+
+    clearScreen();
+    cout << "\nTaking " << subject << " Quiz...\n\n";
+    cout << "BE CAREFUL WHEN ANSWERING YOU CANNOT TURN BACK."<<endl;
+
+    int score = 0;
+    char answer;
+
+    userAnswers[subject].resize(quizQuestions[subject].size(), '\0');
+
+    for (size_t i = 0; i < quizQuestions[subject].size(); i++) {
+        cout << quizQuestions[subject][i].first << "\n";
+        cout << "Your answer: ";
+        cin >> answer;
+
+        userAnswers[subject][i] = tolower(answer);
+
+        if (tolower(answer) == quizQuestions[subject][i].second) {
+            score++;
+        }
+    }
+
+    cout << "Quiz completed! Your score: " << score << "/" << quizQuestions[subject].size() << "\n";
+
+    quizScores[subject] = score;
+    saveProgress();
+    saveAnswersToFile();
+    system("pause");
+}
+
+
 
 
     void viewAccountInformation() {
@@ -646,19 +1485,51 @@ void saveAnswersToFile() {
         system("pause");
     }
 
+
+
+
     void changePassword() {
         clearScreen();
         string oldPassword, newPassword;
-        cout << "===========================\n";
-        cout << " CHANGE PASSWORD\n";
-        cout << "===========================\n";
+        cout << "\t\t\t\033[30;101m|=============================================================||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                      CHANGE PASSWORD                       \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m -----------------------------------------------------------\033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                            \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m    Current Password:    ""                                   \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                            \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m    New Password:    ""                                       \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                            \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||\033[30;107m                                                            \033[30;101m||\033[0m" << endl;
+        cout << "\t\t\t\033[30;101m||============================================================||\033[0m" << endl;
         cout << "Enter current password: ";
         cin >> oldPassword;
 
         if (oldPassword == currentUser .password) {
+            clearScreen();
+            cout << "\t\t\t\033[30;101m|=============================================================||\033[0m" << endl;
+            cout << "\t\t\t\033[30;101m||\033[30;107m                      CHANGE PASSWORD                       \033[30;101m||\033[0m" << endl;
+            cout << "\t\t\t\033[30;101m||\033[30;107m -----------------------------------------------------------\033[30;101m||\033[0m" << endl;
+            cout << "\t\t\t\033[30;101m||\033[30;107m                                                            \033[30;101m||\033[0m" << endl;
+            cout << "\t\t\t\033[30;101m||\033[30;107m    Current Password:    "<<setw(35) << left << oldPassword<<"\033[30;101m||\033[0m" << endl;
+            cout << "\t\t\t\033[30;101m||\033[30;107m                                                            \033[30;101m||\033[0m" << endl;
+            cout << "\t\t\t\033[30;101m||\033[30;107m    New Password:    ""                                       \033[30;101m||\033[0m" << endl;
+            cout << "\t\t\t\033[30;101m||\033[30;107m                                                            \033[30;101m||\033[0m" << endl;
+            cout << "\t\t\t\033[30;101m||\033[30;107m                                                            \033[30;101m||\033[0m" << endl;
+            cout << "\t\t\t\033[30;101m||============================================================||\033[0m" << endl;
             cout << "Enter new password: ";
             cin >> newPassword;
             currentUser .password = newPassword;
+                clearScreen();
+                cout << "\t\t\t\033[30;101m|=============================================================||\033[0m" << endl;
+                cout << "\t\t\t\033[30;101m||\033[30;107m                      CHANGE PASSWORD                       \033[30;101m||\033[0m" << endl;
+                cout << "\t\t\t\033[30;101m||\033[30;107m -----------------------------------------------------------\033[30;101m||\033[0m" << endl;
+                cout << "\t\t\t\033[30;101m||\033[30;107m                                                            \033[30;101m||\033[0m" << endl;
+                cout << "\t\t\t\033[30;101m||\033[30;107m    Current Password:    "<<setw(35) << left << oldPassword<<"\033[30;101m||\033[0m" << endl;
+                cout << "\t\t\t\033[30;101m||\033[30;107m                                                            \033[30;101m||\033[0m" << endl;
+                cout << "\t\t\t\033[30;101m||\033[30;107m    New Password:    "<<setw(35) << left << newPassword<<"    \033[30;101m||\033[0m" << endl;
+                cout << "\t\t\t\033[30;101m||\033[30;107m                                                            \033[30;101m||\033[0m" << endl;
+                cout << "\t\t\t\033[30;101m||\033[30;107m                                                            \033[30;101m||\033[0m" << endl;
+                cout << "\t\t\t\033[30;101m||============================================================||\033[0m" << endl;
             ifstream inFile("accounts.txt");
             ofstream outFile("temp.txt");
             string line;
@@ -686,13 +1557,21 @@ void saveAnswersToFile() {
             rename("temp.txt", "accounts.txt");
             cout << "Password changed successfully!\n";
         } else {
-            cout << "Incorrect current password!\n";
+            clearScreen();
+            cout << "\n\n\n\n\n\n\n\t\t\t\033[30;101m||==========================================================================||" << endl;
+            cout << "\t\t\t||\033[107m                                                                          \033[101m||" <<endl;
+            cout << "\t\t\t||\033[107m                            WRONG PASSWORD!                               \033[101m||"<<endl;
+            cout << "\t\t\t||\033[107m                                                                          \033[101m||" <<endl;
+            cout << "\t\t\t||==========================================================================||\033[0m" << endl;
+            system("pause");
+            changePassword();
         }
         system("pause");
     }
 };
 
 int main() {
+    loading();
     QuizSystem quizSys;
     int choice;
     cout << "\033[38;5;214m" << endl;
@@ -733,7 +1612,18 @@ int main() {
                 if (quizSys.getCurrentUser ().username == "admin" ) {
                     while (true) {
                         quizSys.clearScreen();
-                        cout << "\n1. View All Students\n2. Logout\nEnter choice: ";
+                        cout << "\t\t\t\033[30;101m||===========================||\033[0m"<<endl;
+cout << "\t\t\t\033[30;101m||\033[30;107m         ADMIN PAGE        \033[30;101m||\033[0m"<<endl;
+cout << "\t\t\t\033[30;101m||\033[30;107m---------------------------\033[30;101m||\033[0m"<<endl;
+cout << "\t\t\t\033[30;101m||\033[30;107m                           \033[30;101m||\033[0m"<<endl;
+cout << "\t\t\t\033[30;101m||\033[30;107m  1. ViewallStudents       \033[30;101m||\033[0m"<<endl;
+cout << "\t\t\t\033[30;101m||\033[30;107m                           \033[30;101m||\033[0m"<<endl;
+cout << "\t\t\t\033[30;101m||\033[30;107m  2. Logout                \033[30;101m||\033[0m"<<endl;
+cout << "\t\t\t\033[30;101m||\033[30;107m                           \033[30;101m||\033[0m"<<endl;
+cout << "\t\t\t\033[30;101m||\033[30;107m                           \033[30;101m||\033[0m"<<endl;
+cout << "\t\t\t\033[30;101m||\033[30;107m           Version: \033[31m1.0\033[30;107m    \033[30;101m||\033[0m"<<endl;
+cout << "\t\t\t\033[30;101m||\033[30;107m                           \033[30;101m||\033[0m"<<endl;
+cout << "\t\t\t\033[30;101m||===========================||\033[0m"<<endl;
                         cin >> subChoice;
                         if (subChoice == 1) quizSys.viewAllStudents();
                         else if (subChoice == 2) break;
@@ -757,33 +1647,23 @@ cout << "\t\t||\033[107m    3. View Account                               4. Cha
 cout << "\t\t||\033[107m    ---------------                               -----------------   \033[101m||" << endl;
 cout << "\t\t||\033[107m                                                                      \033[101m||" << endl;
 cout << "\t\t||\033[107m----------------------------------------------------------------------\033[101m||" << endl;
-cout << "\t\t||\033[107m                                                  -----------------   \033[101m||" << endl;
-cout << "\t\t||\033[107m  Version: \033[31m1.0\033[30;107m                                    6. Developed By     \033[101m||" << endl;
-cout << "\t\t||\033[107m                                                  -----------------   \033[101m||" << endl;
+cout << "\t\t||\033[107m                                                                      \033[101m||" << endl;
+cout << "\t\t||\033[107m  Version: \033[31m1.0\033[30;107m                                                        \033[101m||" << endl;
+cout << "\t\t||\033[107m                                                                      \033[101m||" << endl;
 cout << "\t\t\033[30;101m||======================================================================||\033[0m" << endl;
     cout << "Enter your Choice :: ";
                         cin >> subChoice;
                         if (subChoice == 1) quizSys.showProgress();
                         else if (subChoice == 2) {
-                            string subjects[] = {"Applied_Ethics", "Purposive_Communication", "NSTP_2", "Discrete_Mathematics", "PATHFIT_2", "FILDIS", "STS", "Art_Appreciation", "Computer_Programming"};
-                            int quizNum;
-                            quizSys.clearScreen();
-                            cout << "\t\t\033[30;101m                                                              "<<endl;
-                            cout << "\t\t  \033[107m                     Choose Quiz                          \033[101m  ";
-                            cin >> quizNum;
-                            if (quizNum >= 1 && quizNum <= 9) {
-                                quizSys.takeQuiz(subjects[quizNum - 1]);
-                            } else {
-                                cout << "Invalid\n";
-                                system("pause");
-                            }
+                            quizSys.choosequiz();
                         } else if (subChoice == 3) {
                             quizSys.viewAccountInformation();
                         } else if (subChoice == 4) {
                             quizSys.changePassword();
                         } else if (subChoice == 5) {break;
-                        } else if (subChoice == 6){
-                            quizSys.Developers();
+                        } else {
+                            cout << "Invalid Choices!";
+                            system("pause");
                         }
                     }
                 }
