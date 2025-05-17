@@ -6,7 +6,7 @@
 #include <windows.h>
 #include <conio.h>
 #include <sstream>
-#include <ctime>  // For date and time
+#include <ctime>
 
 using namespace std;
 
@@ -14,6 +14,7 @@ struct Purchase {
     string bookname;
     string action;
     string dateTime;
+    string expirationDate;
 };
 
 struct User {
@@ -54,12 +55,13 @@ private:
         string line;
         while (getline(inFile, line)) {
             stringstream ss(line);
-            string datetime, action, bookname;
-            if (getline(ss, datetime, ',') && getline(ss, action, ',') && getline(ss, bookname)) {
+            string datetime, action, bookname, expirationDate;
+            if (getline(ss, datetime, ',') && getline(ss, action, ',') && getline(ss, bookname, ',') && getline(ss, expirationDate)) {
                 Purchase p;
                 p.dateTime = datetime;
                 p.action = action;
                 p.bookname = bookname;
+                p.expirationDate = expirationDate;
                 currentUser.purchaseHistory.push_back(p);
             }
         }
@@ -75,7 +77,7 @@ private:
             return;
         }
         for (const Purchase& p : currentUser.purchaseHistory) {
-            outFile << p.dateTime << "," << p.action << "," << p.bookname << "\n";
+            outFile << p.dateTime << "," << p.action << "," << p.bookname << "," << p.expirationDate << "\n";
         }
         outFile.close();
     }
@@ -85,6 +87,18 @@ private:
         purchase.bookname = bookname;
         purchase.action = action;
         purchase.dateTime = getCurrentDateTime();
+
+        if (action == "rent") {
+            time_t now = time(0);
+            tm* ltm = localtime(&now);
+            ltm->tm_mon += 5;
+            mktime(ltm);
+            char buf[30];
+            strftime(buf, sizeof(buf), "%Y-%m-%d", ltm);
+            purchase.expirationDate = string(buf);
+        } else {
+            purchase.expirationDate = "";
+        }
 
         currentUser.purchaseHistory.push_back(purchase);
         savePurchaseHistory();
@@ -96,7 +110,7 @@ private:
         }
     }
 
-    void logAdminActivity(const string& action, const string& bookname = "") {
+        void logAdminActivity(const string& action, const string& bookname = "") {
         ofstream adminLog("admin_activity_log.txt", ios::app);
         if (adminLog.is_open()) {
             adminLog << getCurrentDateTime() << " - " << currentUser.username << " " << action;
@@ -370,7 +384,6 @@ public:
                     << newBook.quantity << endl;
             outFile.close();
 
-            // Log admin add book action
             logAdminActivity("added", newBook.bookname);
 
             cl();
@@ -456,7 +469,7 @@ public:
         while (true) {
             cl();
             cout << fixed << setprecision(2);
-            cout << "Available Books (Page " << currentPage << " of " << totalPages << "):\n\n\n\n";
+            cout << "Available Books (Page " << currentPage << " of " << totalPages << "):\n\n\n";
 
             int startIndex = (currentPage - 1) * booksPerPage;
             int endIndex = min(startIndex + booksPerPage, totalBooks);
@@ -516,15 +529,27 @@ public:
                     cout << left;
                     cout << setw(50) << ("     Stock: " + to_string(book.quantity));
                 }
-                cout << endl << endl;
+                cout << endl <<endl;
                 cout << "========================================         ========================================         ========================================\n";
-                cout << endl << endl << endl << endl << endl;
+                cout << endl << endl << endl;
             }
 
             cout << "1. Previous Page  2. Next Page  0. Exit View\nEnter choice or book name to buy/rent: ";
             string choice;
             cin.ignore();
             getline(cin, choice);
+
+
+                if (choice == "1" && currentPage > 1) {
+                    currentPage--;
+                } else if (choice == "2" && currentPage < totalPages) {
+                    currentPage++;
+                } else if (choice == "0") {
+                    break;
+                } else {
+                    cout << "Invalid choice, please enter book name or navigation choice." << endl;
+                    system("pause");
+                }
 
             bool foundBookChoice = false;
             for(auto& book : books){
@@ -563,19 +588,6 @@ public:
                         cout << "Sorry, This book is out of stock"<<endl;
                     }
                     break;
-                }
-            }
-
-            if (!foundBookChoice){
-                if (choice == "1" && currentPage > 1) {
-                    currentPage--;
-                } else if (choice == "2" && currentPage < totalPages) {
-                    currentPage++;
-                } else if (choice == "0") {
-                    break;
-                } else {
-                    cout << "Invalid choice, please enter book name or navigation choice." << endl;
-                    system("pause");
                 }
             }
         }
@@ -643,7 +655,6 @@ public:
         currentUser.money = currentUser.money + cash;
         saveUsersToFile();
 
-        // Log cashin for admin (if admin logged in)
         if(currentUser.isAdmin){
             logAdminActivity("cashed in $" + to_string(cash));
         }
@@ -656,7 +667,11 @@ public:
             cout << "No purchase history found.\n";
         } else {
             for (const Purchase& p : currentUser.purchaseHistory) {
-                cout << p.dateTime << " - " << p.action << " - " << p.bookname << endl;
+                cout << p.dateTime << " - " << p.action << " - " << p.bookname;
+                if (p.action == "rent") {
+                    cout << " (Expires on: " << p.expirationDate << ")";
+                }
+                cout << endl;
             }
         }
         system("pause");
@@ -680,23 +695,141 @@ public:
         system("pause");
     }
 
-    // New helper function to display current logged in user
     void displayCurrentUser () {
         cout << "Logged in as: " << currentUser.firstname << " " << currentUser.lastname << " (Username: " << currentUser.username << ")\n\n";
     }
 
+    bool isRentalExpired(const Purchase& purchase) {
+        if (purchase.action != "rent" || purchase.expirationDate.empty())
+            return false;
+
+        time_t now = time(0);
+        tm* ltm = localtime(&now);
+        char buf[30];
+        strftime(buf, sizeof(buf), "%Y-%m-%d", ltm);
+        string currentDate(buf);
+
+        return currentDate > purchase.expirationDate;
+    }
+
     void updateBook() {
-        if (books.empty()) {
-            cout << "No books available to update." << endl;
-            system("pause");
+        Loading2();
+        ifstream inFile("bookstorebooks.txt");
+        if (!inFile.is_open()) {
+            cout << "Error: Unable to open file!" << endl;
             return;
         }
 
-        cl();
-        cout << "Available Books for Update:\n";
-        for (const auto& book : books) {
-            cout << "- " << book.bookname << endl;
+        books.clear();
+
+        string line;
+        while (getline(inFile, line)) {
+            Book book;
+            stringstream ss(line);
+            string field;
+            int i = 0;
+
+            while (getline(ss, field, ',')) {
+                switch (i) {
+                    case 0: book.bookname = field; break;
+                    case 1: book.author = field; break;
+                    case 2: book.booknum = field; break;
+                    case 3: book.publicationDate = field; break;
+                    case 4: book.genre = field; break;
+                    case 5: book.numPages = field; break;
+                    case 6: book.rating = field; break;
+                    case 7: book.price = stof(field); break;
+                    case 8: book.rentprice = stof(field); break;
+                    case 9: book.quantity = stoi(field); break;
+                }
+                i++;
+            }
+
+            if (i >= 10) {
+                books.push_back(book);
+            }
         }
+        inFile.close();
+
+        if (books.empty()) {
+            cout << "No books available." << endl;
+            return;
+        }
+
+        const int booksPerRow = 3;
+        const int rowsPerPage = 3;
+        const int booksPerPage = booksPerRow * rowsPerPage;
+        int totalBooks = books.size();
+        int totalPages = (totalBooks + booksPerPage - 1) / booksPerPage;
+        int currentPage = 1;
+
+        while (true) {
+            cl();
+            cout << fixed << setprecision(2);
+            cout << "Available Books (Page " << currentPage << " of " << totalPages << "):\n\n\n";
+
+            int startIndex = (currentPage - 1) * booksPerPage;
+            int endIndex = min(startIndex + booksPerPage, totalBooks);
+
+            for (int row = 0; row < rowsPerPage && startIndex + row * booksPerRow < endIndex; ++row) {
+                cout << "========================================         ========================================         ========================================\n\n";
+                for (int col = 0; col < booksPerRow; ++col) {
+                    int index = startIndex + row * booksPerRow + col;
+                    if (index >= endIndex) break;
+                    const auto& book = books[index];
+                    cout << left;
+                    cout << setw(50) << ("     Book Name: " + book.bookname);
+                }
+                cout << endl;
+                for (int col = 0; col < booksPerRow; ++col) {
+                    int index = startIndex + row * booksPerRow + col;
+                    if (index >= endIndex) break;
+
+                    const auto& book = books[index];
+                    cout << left;
+                    cout << setw(50) << ("     Author: " + book.author);
+                }
+                cout << endl;
+                for (int col = 0; col < booksPerRow; ++col) {
+                    int index = startIndex + row * booksPerRow + col;
+                    if (index >= endIndex) break;
+
+                    const auto& book = books[index];
+                    cout << left;
+                    cout << setw(50) << ("     Genre: " + book.genre);
+                }
+                cout << endl;
+                for (int col = 0; col < booksPerRow; ++col) {
+                    int index = startIndex + row * booksPerRow + col;
+                    if (index >= endIndex) break;
+
+                    const auto& book = books[index];
+                    cout << left;
+                    cout << ("     Price: $") << fixed << setprecision(2) << setw(37) << left << book.price;
+                }
+                cout << endl;
+                for (int col = 0; col < booksPerRow; ++col) {
+                    int index = startIndex + row * booksPerRow + col;
+                    if (index >= endIndex) break;
+
+                    const auto& book = books[index];
+                    cout << left;
+                    cout << ("     Rent Price: $") << fixed << setprecision(2) << setw(32) << left << book.rentprice;
+                }
+
+                cout << endl;
+                for (int col = 0; col < booksPerRow; ++col) {
+                    int index = startIndex + row * booksPerRow + col;
+                    if (index >= endIndex) break;
+
+                    const auto& book = books[index];
+                    cout << left;
+                    cout << setw(50) << ("     Stock: " + to_string(book.quantity));
+                }
+                cout << endl <<endl;
+                cout << "========================================         ========================================         ========================================\n";
+                cout << endl << endl << endl;
+            }
 
         cout << "Enter the name of the book to update: ";
         string bookname;
@@ -772,14 +905,9 @@ public:
             system("pause");
         }
     }
+    }
 
     void deleteBook() {
-        if (books.empty()) {
-            cout << "No books available to delete." << endl;
-            system("pause");
-            return;
-        }
-
         cl();
         cout << "Available Books for Deletion:\n";
         for (const auto& book : books) {
@@ -799,7 +927,6 @@ public:
                 books.erase(it);
                 saveBooksToFile();
 
-                // Log delete action
                 logAdminActivity("deleted", bookname);
 
                 cout << "Book deleted successfully.\n";
@@ -817,7 +944,7 @@ public:
         string fullname = currentUser.lastname + ", " + currentUser.firstname;
         while (true) {
             cl();
-            displayCurrentUser(); // Display the current logged-in user
+            displayCurrentUser();
             int choice;
             cout << "\n\n\n";
             cout << "\t\t\033[48;5;236m\033[38;5;236m=======================================================================\033[0m"<<endl;
@@ -942,6 +1069,7 @@ int main() {
                 if (store.getCurrentUser().isAdmin) {
                     while (true) {
                         int subchoice;
+                        store.cl();
                         cout << "\nAdmin Menu: \n1. Add Books\n2. View Books\n3. View Activity Log\n4. Update Book\n5. Delete Book\n6. Logout\nEnter choice: ";
                         cin >> subchoice;
                         if (subchoice == 1) {
@@ -972,4 +1100,3 @@ int main() {
     }
     return 0;
 }
-
